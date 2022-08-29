@@ -9,7 +9,7 @@ module.exports = async function (request, response) {
     const mailSubject = "BTC price in UAH"
     const mailBody = `Price for BTC ${priceForBTC} UAH`
 
-    let mailsWithIssues = []
+    const mailsWithIssues = []
     for (let i = 0; i < emails.length; ++i) {
         let recipient = JSON.parse(emails[i])
         try {
