@@ -19,13 +19,14 @@ module.exports = async function (request, response) {
         throw Error('Couldn\'t load emails from file')
     }
 
-    let allEmails = JSON.parse(dataFromFileJson)            //now it an object
-    if (helper.checkIfEmailExist(allEmails, emailJson)) {
+    let allEmails = JSON.parse(dataFromFileJson)
+    let newEmail = JSON.parse(newEmailObj)
+    if (helper.checkIfEmailExist(allEmails, newEmail.email)) {
         throw Error('Email already exists.')
     }
 
-    allEmails.push(emailJson)                               //add some data
-    let updatedEmails = JSON.stringify(allEmails)           //convert it back to json
+    allEmails.push(emailJson)
+    let updatedEmails = JSON.stringify(allEmails)
     await writeEmailsToFile(updatedEmails)
 
     response.send('Email was successfully added.')

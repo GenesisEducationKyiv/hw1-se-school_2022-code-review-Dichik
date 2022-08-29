@@ -10,7 +10,6 @@ module.exports = async (recipient, mailSubject, mailBody) => {
     }
 
     try {
-        // Get response from the createTransport
         let emailTransporter = await createTransporter()
 
         emailTransporter.sendMail(mailOptions, function (error, info) {
