@@ -3,31 +3,32 @@ const readEmailsFromFile = require('../input_output/fileReaderService')
 const helper = require('../../helpers/emailHelper').default
 
 module.exports = async function (request, response) {
+	if (!request.body) {
+		throw Error('Body is required for request.')
+	}
 
-    if (!request.body) {
-        throw Error('Body is required for request.')
-    }
+	const emailJson = JSON.stringify(request.body)
 
-    emailJson = JSON.stringify(request.body)
+	if (!helper.validateEmail(emailJson)) {
+		throw Error(
+			'You are trying to add invalid email. Please fix it and try again.'
+		)
+	}
 
-    if (!helper.validateEmail(emailJson)) {
-        throw Error('You are trying to add invalid email. Please fix it and try again.')
-    }
+	const dataFromFileJson = await readEmailsFromFile()
+	if (!dataFromFileJson) {
+		throw Error("Couldn't load emails from file")
+	}
 
-    dataFromFileJson = await readEmailsFromFile()
-    if (!dataFromFileJson) {
-        throw Error('Couldn\'t load emails from file')
-    }
+	let allEmails = JSON.parse(dataFromFileJson)
+	let newEmail = JSON.parse(emailJson)
+	if (helper.checkIfEmailExist(allEmails, newEmail.email)) {
+		throw Error('Email already exists.')
+	}
 
-    let allEmails = JSON.parse(dataFromFileJson)
-    let newEmail = JSON.parse(newEmailObj)
-    if (helper.checkIfEmailExist(allEmails, newEmail.email)) {
-        throw Error('Email already exists.')
-    }
+	allEmails.push(emailJson)
+	let updatedEmails = JSON.stringify(allEmails)
+	await writeEmailsToFile(updatedEmails)
 
-    allEmails.push(emailJson)
-    let updatedEmails = JSON.stringify(allEmails)
-    await writeEmailsToFile(updatedEmails)
-
-    response.send('Email was successfully added.')
+	response.send('Email was successfully added.')
 }

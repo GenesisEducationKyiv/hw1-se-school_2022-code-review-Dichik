@@ -11,9 +11,14 @@
   "dependencies": {
     "coinmarketcap-api": "^3.1.1",
     "dotenv": "^16.0.1",
+    "eslint-plugin-promise": "^6.0.1",
     "experss": "^0.0.1-security",
     "express": "^4.18.1",
     "googleapis": "^105.0.0",
     "nodemailer": "^6.7.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-plugin-prettier": "^4.2.1"
   }
 }
