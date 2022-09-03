@@ -6,7 +6,7 @@ module.exports = async function (request, response) {
 	if (!request.body) {
 		throw Error('Body is required for request.')
 	}
-
+// TODO move all logic with handling emails to helpers and add unit tests to it
 	const emailJson = JSON.stringify(request.body)
 
 	if (!helper.validateEmail(emailJson)) {

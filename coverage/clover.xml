@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1662198363749" clover="3.2.0">
-  <project timestamp="1662198363749" name="All files">
-    <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2" elements="11" coveredelements="11" complexity="0" loc="7" ncloc="7" packages="1" files="1" classes="1"/>
-    <file name="emailHelper.js" path="/Users/tarasbohdan/Desktop/projects/hw1-se-school_2022-code-review-Dichik/helpers/emailHelper.js">
+<coverage generated="1662200246809" clover="3.2.0">
+  <project timestamp="1662200246809" name="All files">
+    <metrics statements="14" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="3" elements="22" coveredelements="15" complexity="0" loc="14" ncloc="14" packages="2" files="2" classes="2"/>
+    <package name="helpers">
       <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="3" count="3" type="stmt"/>
-      <line num="4" count="3" type="stmt"/>
-      <line num="7" count="2" type="stmt"/>
-      <line num="8" count="4" type="cond" truecount="2" falsecount="0"/>
-      <line num="10" count="1" type="stmt"/>
-      <line num="14" count="1" type="stmt"/>
-    </file>
+      <file name="emailHelper.js" path="/Users/tarasbohdan/Desktop/projects/hw1-se-school_2022-code-review-Dichik/helpers/emailHelper.js">
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="services.input_output">
+      <metrics statements="7" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="fileReaderService.js" path="/Users/tarasbohdan/Desktop/projects/hw1-se-school_2022-code-review-Dichik/services/input_output/fileReaderService.js">
+        <metrics statements="7" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>
