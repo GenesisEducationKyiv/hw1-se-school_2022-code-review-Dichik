@@ -1,12 +1,11 @@
 const helper = {
 	validateEmail(emailAddress) {
-		let regexEmail = '/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/'
+		let regexEmail = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
 		return Boolean(emailAddress.match(regexEmail))
 	},
-	checkIfEmailExist(emails, newEmail) {
-		for (let i = 0; i < emails.length; ++i) {
-			let recipient = JSON.parse(emails[i])
-			if (recipient.email === newEmail) return true
+	checkIfEmailExist(emails, emailToCheck) {
+		for(let i = 0; i < emails.length; ++ i) {
+			if (emails[i] === emailToCheck) return true
 		}
 		return false
 	},

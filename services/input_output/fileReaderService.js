@@ -1,8 +1,8 @@
 const fs = require('fs')
 
-module.exports = async function () {
+module.exports = async function (path) {
 	return fs.readFileSync(
-		'data/emails.json',
+		path,
 		'utf8',
 		function readFileCallback(error, data) {
 			if (error) {
