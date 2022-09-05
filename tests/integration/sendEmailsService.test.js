@@ -8,7 +8,7 @@ describe('POST /sendEmails', () => {
     })
 
     it('should subcribe new email', async () => {
-        const response = await request(baseURL).post("/subscribe").send()
+        const response = await request(baseURL).post("/sendEmails").send()
         expect(response.statusCode).toBe(200);
     })
 

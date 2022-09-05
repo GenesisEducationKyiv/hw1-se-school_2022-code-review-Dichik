@@ -6,7 +6,7 @@ const client = new Coinmarketcap(key)
 let crypto = 'BTC'
 let convertTo = 'UAH'
 
-module.exports = async function (_request, res, _next) {
+module.exports = async function (_request, _response, _next) {
 	return await client
 		.getQuotes({ symbol: crypto, convert: convertTo })
 		.then((response) => response.data.BTC.quote.UAH.price)
