@@ -3,7 +3,7 @@ const rateService = require('../rating/rateService')
 const sendEmail = require('./sendEmail')
 
 module.exports = async function (request, response) {
-	let emailsObject = await readFile('data/emails.json')
+	let emailsObject = await readFile('emails.json')
 	let emails = JSON.parse(emailsObject)
 	const priceForBTC = await rateService(request, response)
 	const mailSubject = 'BTC price in UAH'
@@ -11,12 +11,12 @@ module.exports = async function (request, response) {
 
 	const mailsWithIssues = []
 	for (let i = 0; i < emails.length; ++i) {
-		let recipient = JSON.parse(emails[i])
+		let recipient = emails[i]
 		try {
-			await sendEmail(recipient.email, mailSubject, mailBody)
+			await sendEmail(recipient, mailSubject, mailBody)
 		} catch (error) {
 			console.log(error)
-			mailsWithIssues.push(recipient.email)
+			mailsWithIssues.push(recipient)
 		}
 	}
 	let message = !mailsWithIssues.length
