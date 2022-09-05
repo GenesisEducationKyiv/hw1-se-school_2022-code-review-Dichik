@@ -1,6 +1,7 @@
 const writeEmailsToFile = require('../input_output/fileWriterService')
 const readEmailsFromFile = require('../input_output/fileReaderService')
 const helper = require('../../helpers/emailHelper').default
+const storage = 'emails.json'
 
 module.exports = async function (request, response) {
 	if (!request.body) {
@@ -15,7 +16,7 @@ module.exports = async function (request, response) {
 		)
 	}
 
-	const dataFromFileJson = await readEmailsFromFile('emails.json')
+	const dataFromFileJson = await readEmailsFromFile(storage)
 	if (!dataFromFileJson) {
 		throw Error("Couldn't load emails from file")
 	}
@@ -28,7 +29,7 @@ module.exports = async function (request, response) {
 
 	allEmails.push(emailJson)
 	let updatedEmails = JSON.stringify(allEmails)
-	await writeEmailsToFile(updatedEmails)
+	await writeEmailsToFile(updatedEmails, storage)
 
 	response.send('Email was successfully added.')
 }
