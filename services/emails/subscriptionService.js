@@ -15,7 +15,7 @@ module.exports = async function (request, response) {
 		)
 	}
 
-	const dataFromFileJson = await readEmailsFromFile()
+	const dataFromFileJson = await readEmailsFromFile('emails.json')
 	if (!dataFromFileJson) {
 		throw Error("Couldn't load emails from file")
 	}

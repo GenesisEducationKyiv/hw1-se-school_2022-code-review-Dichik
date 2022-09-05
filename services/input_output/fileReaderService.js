@@ -1,8 +1,8 @@
 const fs = require('fs')
 
-module.exports = async function (path) {
-	return fs.readFileSync(
-		path,
+module.exports = function (path) {
+	const data = fs.readFileSync(
+		`./data/${path}`,
 		'utf8',
 		function readFileCallback(error, data) {
 			if (error) {
@@ -14,4 +14,5 @@ module.exports = async function (path) {
 			return data
 		}
 	)
+	return data
 }
