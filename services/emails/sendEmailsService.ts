@@ -41,7 +41,7 @@ class SendEmailService implements Sender {
 	}
 
 	public async sendBulk(): Promise<void> {
-		let emailsObject = await this.fileReaderService.readFromFile('emails.json')
+		let emailsObject = await this.fileReaderService.read('emails.json')
 		let emails = JSON.parse(emailsObject)
 		const priceForBTC = await this.coinmarketRateService.getRate()
 		const mailSubject = 'BTC price in UAH'
