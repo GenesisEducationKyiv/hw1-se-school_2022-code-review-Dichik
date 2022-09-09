@@ -11,11 +11,3 @@ export const rate = async (request: express.Request, response: express.Response)
 		})
 	}
 }
-
-// class RateController {
-
-// 	// rate()
-
-// }
-
-// export default RateController;

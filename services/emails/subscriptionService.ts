@@ -31,7 +31,7 @@ class SubscribtionService {
 			)
 		}
 
-		const dataFromFileJson = await this.fileReaderService.readFromFile(this.storage)
+		const dataFromFileJson = await this.fileReaderService.read(this.storage)
 		if (!dataFromFileJson) {
 			throw Error("Couldn't load emails from file")
 		}
@@ -43,7 +43,7 @@ class SubscribtionService {
 
 		allEmails.push(email)
 		let updatedEmails = JSON.stringify(allEmails)
-		await this.fileWriterService.writeToFile(updatedEmails, this.storage)
+		await this.fileWriterService.write(updatedEmails, this.storage)
 		
 		return allEmails
 	}
