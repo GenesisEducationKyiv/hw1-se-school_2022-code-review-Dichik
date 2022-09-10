@@ -1,9 +1,10 @@
-const emailHelper = require('../../helpers/emailHelper')
+import EmailUtils from '../../helpers/emailUtils'
 
 describe('Test email helper\'s functions', () => {
     const invalidEmail = 'email@.com'
     const invalidEmailWithouDog = '123gmail.com'
     const validEmail = 'omeluan.dima@gmail.com'
+    const emailHelper = new EmailUtils()
 
     test('Test email validation', () => {
         expect(emailHelper.validateEmail(invalidEmail)).toBe(false)

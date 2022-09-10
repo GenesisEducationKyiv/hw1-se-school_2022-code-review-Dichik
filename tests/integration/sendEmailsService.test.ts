@@ -1,4 +1,4 @@
-const request = require("supertest")
+import request from "supertest"
 const baseURL = "http://localhost:8081"
 
 describe('POST /sendEmails', () => {
