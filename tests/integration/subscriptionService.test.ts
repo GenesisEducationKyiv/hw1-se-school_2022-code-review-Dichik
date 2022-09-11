@@ -1,8 +1,8 @@
-import request from "supertest"
-const baseURL = "http://localhost:8081"
 
 describe('POST /subscribe', () => {
     const date = Date.now()
+    const request = require('supertest')
+    const baseURL = "http://localhost:8081"
 
     const newEmail = {
         email: `test.email${date}@email.com`

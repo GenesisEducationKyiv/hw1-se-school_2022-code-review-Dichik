@@ -1,7 +1,8 @@
-import request from "supertest"
-const baseURL = "http://localhost:8081"
 
 describe('POST /sendEmails', () => {
+
+    const request = require('supertest')
+    const baseURL = "http://localhost:8081"
 
     afterAll(async () => {
         // TODO delete from file, implement it when connect to DB

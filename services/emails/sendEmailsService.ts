@@ -26,8 +26,8 @@ class SendEmailService implements Sender {
 		}
 	
 		try {
-			let emailTransporter = await this.emailTrasnporter.create()
-			emailTransporter.sendMail(mailOptions, function (error: any, info: { response: string; }) {
+			let emailTransporter = this.emailTrasnporter.create()
+			await emailTransporter.sendMail(mailOptions, function (error: any, info: { response: string; }) {
 				if (error) {
 					console.log(error)
 				} else {
