@@ -8,13 +8,13 @@ class SendEmailService implements Sender {
 
 	private coinmarketRateService: CoinmarketRateService;
 	private fileReaderService: FileReaderService;
-	private emailTrasnporter: EmailTransporter;
+	private emailTrasnporter: any;
 
 
 	constructor() {
 		this.coinmarketRateService = new CoinmarketRateService();
 		this.fileReaderService = new FileReaderService();
-		this.emailTrasnporter = new EmailTransporter;
+		this.emailTrasnporter = new EmailTransporter().create();
 	}
 
 	public async send(recipient: string, mailSubject: string, mailBody: string): Promise<void> {
@@ -26,8 +26,7 @@ class SendEmailService implements Sender {
 		}
 	
 		try {
-			let emailTransporter = this.emailTrasnporter.create()
-			await emailTransporter.sendMail(mailOptions, function (error: any, info: { response: string; }) {
+			await this.emailTrasnporter.sendMail(mailOptions, function (error: any, info: { response: string; }) {
 				if (error) {
 					console.log(error)
 				} else {
