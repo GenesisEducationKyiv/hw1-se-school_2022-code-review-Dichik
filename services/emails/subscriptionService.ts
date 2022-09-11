@@ -48,6 +48,25 @@ class SubscribtionService {
 		return allEmails
 	}
 
+	public async unsubscribe(emails: Array<string>): Promise<string[]> {
+		let emailsToRemove: Array<string> = []
+        let emailsToSave: any = []
+        const dataFromFileJson = await this.fileReaderService.read(this.storage)
+
+        let allEmails = JSON.parse(dataFromFileJson)
+
+		for(let i = 0; i < allEmails.length; ++ i) {
+			let email = allEmails[i]
+			if (!this.emailUtils.checkIfEmailExist(emails, email)) {
+                emailsToSave.push(email)
+            } else emailsToRemove.push(email)
+		}
+
+        let updatedEmails = JSON.stringify(emailsToSave)
+        await this.fileWriterService.write(updatedEmails, this.storage)
+		return emailsToRemove
+	}
+
 }
 
 export default SubscribtionService;

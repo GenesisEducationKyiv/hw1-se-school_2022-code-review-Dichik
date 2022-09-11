@@ -43,6 +43,13 @@ class App {
         })
     }
 
+    shutdown() {
+        this.app.listen(this.port, () => {
+            console.log(`Example app stop listening on port ${this.port}`)
+            this.app.close()
+        })
+    }
+
 }
 
 export default App

@@ -2,22 +2,32 @@ import FileReaderService from "../../services/input_output/fileReaderService"
 
 describe('Testing fileReaderService', () => {
 
-    const fileReaderService = new FileReaderService()
+    const EMPTY_STRING = ''
+    let fileReaderService: FileReaderService;
 
-    test('Valid reading', async () => {
-        const data = await fileReaderService.read('check_read.json')
-        expect(data).not.toBe(null)
+    beforeAll(() => {
+        fileReaderService = new FileReaderService()
     })
 
-    test('Invalid reading', async () => {
-        let errorFlag = false
+    test('Valid reading from check_read.json file', async () => {
+        let result: string = EMPTY_STRING
         try {
-            await fileReaderService.read('invalid_name.json')
+            result = await fileReaderService.read('check_read.json')
         } catch (error) {
-            errorFlag = true
             console.log(error)
         }
-        expect(errorFlag).toBe(true)
+        expect(result).not.toBe(EMPTY_STRING)
     })
+
+    test('Invalid reading from invalid_name.json file', async () => {
+        let result: string = EMPTY_STRING
+        try {
+            result = await fileReaderService.read('invalid_name.json')
+        } catch (error) {
+            console.log(error)
+        }
+        expect(result).toBe(EMPTY_STRING)
+    })
+    
 })
 
