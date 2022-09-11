@@ -51,4 +51,13 @@ describe('POST /subscribe', () => {
         expect(response.statusCode).toBe(409);
     })
 
+    it('should unsubscribe email', async () => {
+        const response = await request(baseURL).post("/subscribe").send(newEmail)
+        let newEmails: string[] = [];
+        newEmails.push(newEmail.email)
+
+        let emailsToRemove: string[] = await subscriptionService.unsubscribe(newEmails)
+        expect(emailsToRemove).toStrictEqual(newEmails)
+    })
+
 })
