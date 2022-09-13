@@ -42,7 +42,7 @@ class SendEmailService implements Sender {
 	public async sendBulk(): Promise<void> {
 		let emailsObject = await this.fileReaderService.read('emails.json')
 		let emails = JSON.parse(emailsObject)
-		const priceForBTC = await this.coinmarketRateService.getRate()
+		const priceForBTC = await this.coinmarketRateService.getRate('BTC', 'UAH')
 		const mailSubject = 'BTC price in UAH'
 		const mailBody = `Price for BTC ${priceForBTC} UAH`
 

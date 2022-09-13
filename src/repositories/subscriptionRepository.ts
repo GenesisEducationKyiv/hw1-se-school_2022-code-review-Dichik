@@ -42,7 +42,7 @@ class SubscriptionRepository implements Repository<string> {
     async isExist(email: string): Promise<boolean> {
         const allEmails = await this.getAll()
         if (this.emailUtils.checkIfEmailExist(allEmails, email)) {
-			throw Error('Email already exists.')
+			return true
 		}
         return false
     }
@@ -50,7 +50,7 @@ class SubscriptionRepository implements Repository<string> {
     async getAll(): Promise<string[]> {
         const dataFromFileJson = await this.fileReaderService.read(this.storage)
 		if (!dataFromFileJson) {
-			throw Error("Couldn't load emails from file")
+			throw new Error("Couldn't load emails from file")
 		}
         let allEmails = JSON.parse(dataFromFileJson)
 
@@ -64,7 +64,7 @@ class SubscriptionRepository implements Repository<string> {
     async save(email: string): Promise<void> {
 
         if (!this.emailUtils.validateEmail(email)) {
-			throw Error(
+			throw new Error(
 				'You are trying to add invalid email. Please fix it and try again.'
 			)
 		}
