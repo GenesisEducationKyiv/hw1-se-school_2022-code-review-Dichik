@@ -1,18 +1,15 @@
 import express from 'express'
-import EmailUtils from '../../helpers/emailUtils';
 import SubscriptionRepository from '../../repositories/subscriptionRepository'
 
 class SubscribtionService {
 
 	private subscriptionRepository: SubscriptionRepository;
-	private emailUtils: EmailUtils;
 
 	constructor() {
 		this.subscriptionRepository = new SubscriptionRepository()
-		this.emailUtils = new EmailUtils()
 	}
 
-	public async subscribe(request: express.Request, response: express.Response): Promise<string[]> {
+	public async subscribe(request: express.Request, _response: express.Response): Promise<string[]> {
 		if (!request.body || !request.body.email) {
 			throw Error('Body is required for request.')
 		}
@@ -23,7 +20,7 @@ class SubscribtionService {
 			return this.subscriptionRepository.getAll()
 		} catch(error) {
 			console.log('Couldn\'t save your email, error: ' + error)
-			throw Error(error)
+			throw Error(error as string)
 		}
 	}
 
@@ -34,7 +31,7 @@ class SubscribtionService {
 			return result
 		} catch(error) {
 			console.log(error)
-			throw Error(error)
+			throw Error(error as string)
 		}
 	}
 
