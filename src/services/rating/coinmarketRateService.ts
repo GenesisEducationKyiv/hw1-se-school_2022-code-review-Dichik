@@ -21,6 +21,10 @@ class CoinmarketRateService extends RateProvider {
 			.catch((error: any) => console.log(error))
 	}
 
+	getType(): string {
+		return 'COINMARKET'
+	}
+
 }
 
 export default CoinmarketRateService;

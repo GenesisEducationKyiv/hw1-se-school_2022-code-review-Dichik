@@ -1,3 +1,4 @@
+import CoinbaseRateService from "./coinbaseRateService";
 import CoinmarketRateService from "./coinmarketRateService";
 import RateProvider from "./rateProvider.interface"
 
@@ -14,6 +15,8 @@ class RateService {
 
         if(config === 'coinmarket') {
             this.rateProvider = new CoinmarketRateService()
+        } else if(config === 'coinbase') {
+            this.rateProvider = new CoinbaseRateService()
         } else {
             throw Error('You are using wrong provider. Please fix it in .env file...')
         }
