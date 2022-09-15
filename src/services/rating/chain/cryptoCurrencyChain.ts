@@ -29,7 +29,11 @@ class CryptoCurrencyChain {
             throw new Error('Currency provider is not specified...')
         }
         const result = await this.cryptoCurrencyProvider.getCurrencyRate('BTC', 'UAH')
-        return result
+        return this.formResponse(result)
+    }
+
+    private formResponse(result: string): string {
+        return `${this.cryptoCurrencyProvider.getType()} - Response: ${result}`
     }
 
 }
