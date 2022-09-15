@@ -8,12 +8,12 @@ class RateService {
     private CACHING_TIME: number = 300000; // TODO move to env file
 
     constructor() {
-        this.lastFetchingResult = ''
         this.providerChain = new CryptoCurrencyChain()
+        this.lastFetchingResult = ''
     }
 
     async rate(): Promise<string> {
-        if(Date.now() - this.lastFetchingTime < this.CACHING_TIME) {
+        if(Date.now() - this.lastFetchingTime < this.CACHING_TIME && this.lastFetchingResult !== '') {
             return this.lastFetchingResult
         }
         this.lastFetchingResult = await this.providerChain.getCurrencyRate()
