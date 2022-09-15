@@ -1,18 +1,18 @@
-import CoinmarketRateService from '../rating/coinmarketRateService'
 import FileReaderService from '../input_output/fileReaderService';
 import EmailTransporter from './emailTransporter';
 import Sender from './sender.interface';
+import CryptoCurrencyChain from '../rating/chain/cryptoCurrencyChain';
 require('dotenv').config()
 
 class SendEmailService implements Sender {
 
-	private coinmarketRateService: CoinmarketRateService;
+    private providerChain: CryptoCurrencyChain;
 	private fileReaderService: FileReaderService;
 	private emailTrasnporter: any;
 
 
 	constructor() {
-		this.coinmarketRateService = new CoinmarketRateService();
+		this.providerChain = new CryptoCurrencyChain();
 		this.fileReaderService = new FileReaderService();
 		this.emailTrasnporter = new EmailTransporter().create();
 	}
@@ -42,7 +42,7 @@ class SendEmailService implements Sender {
 	public async sendBulk(): Promise<void> {
 		let emailsObject = await this.fileReaderService.read('emails.json')
 		let emails = JSON.parse(emailsObject)
-		const priceForBTC = await this.coinmarketRateService.getRate('BTC', 'UAH')
+		const priceForBTC = await this.providerChain.getCurrencyRate()
 		const mailSubject = 'BTC price in UAH'
 		const mailBody = `Price for BTC ${priceForBTC} UAH`
 
@@ -59,6 +59,7 @@ class SendEmailService implements Sender {
 		let message = !mailsWithIssues.length
 			? 'Emails were sent'
 			: `All mails except ${mailsWithIssues} were sent`
+		console.log(message)
 		// response.send(message)
 	}
 
