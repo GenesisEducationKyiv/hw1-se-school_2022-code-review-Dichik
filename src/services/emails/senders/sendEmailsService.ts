@@ -1,19 +1,19 @@
-import FileReaderService from '../../input_output/fileReaderService';
 import EmailTransporter from '../transporters/emailTransporter';
 import Sender from './sender.interface';
 import CryptoCurrencyChain from '../../rating/chain/cryptoCurrencyChain';
+import SubscriptionRepository from '../../../repositories/subscriptionRepository';
 require('dotenv').config()
 
 class SendEmailService implements Sender {
 
     private providerChain: CryptoCurrencyChain;
-	private fileReaderService: FileReaderService;
+	private emailsRepository: SubscriptionRepository;
 	private emailTrasnporter: any;
 
 
 	constructor() {
 		this.providerChain = new CryptoCurrencyChain();
-		this.fileReaderService = new FileReaderService();
+		this.emailsRepository = new SubscriptionRepository();
 		this.emailTrasnporter = new EmailTransporter().create();
 	}
 
@@ -40,9 +40,9 @@ class SendEmailService implements Sender {
 	}
 
 	public async sendBulk(): Promise<void> {
-		let emailsObject = await this.fileReaderService.read('emails.json')
-		let emails = JSON.parse(emailsObject)
+		let emails = await this.emailsRepository.getAll()
 		const priceForBTC = await this.providerChain.getCurrencyRate()
+		
 		const mailSubject = 'BTC price in UAH'
 		const mailBody = `Price for BTC ${priceForBTC} UAH`
 
