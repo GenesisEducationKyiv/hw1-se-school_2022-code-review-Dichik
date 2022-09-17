@@ -1,19 +1,17 @@
-import EmailUtils from "../helpers/emailUtils";
 import FileReaderService from "../services/input_output/fileReaderService";
 import FileWriterService from "../services/input_output/fileWriterService";
 import Repository from "./repository.interface";
 
 
 class SubscriptionRepository implements Repository<string> {
+    private static regexEmail: string = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
     
     private storage: string;
-	private emailUtils: EmailUtils;
 	private fileReaderService: FileReaderService;
 	private fileWriterService: FileWriterService;
 
     constructor() {
         this.storage = 'emails.json'
-		this.emailUtils = new EmailUtils()
 		this.fileReaderService = new FileReaderService()
 		this.fileWriterService = new FileWriterService()
     }
@@ -29,7 +27,7 @@ class SubscriptionRepository implements Repository<string> {
 
 		for(let i = 0; i < allEmails.length; ++ i) {
 			let email = allEmails[i]
-			if (!this.emailUtils.checkIfEmailExist(emails, email)) {
+			if (!SubscriptionRepository.checkIfEmailExist(emails, email)) {
                 emailsToSave.push(email)
             } else emailsToRemove.push(email)
 		}
@@ -41,7 +39,7 @@ class SubscriptionRepository implements Repository<string> {
 
     async isExist(email: string): Promise<boolean> {
         const allEmails = await this.getAll()
-        if (this.emailUtils.checkIfEmailExist(allEmails, email)) {
+        if (SubscriptionRepository.checkIfEmailExist(allEmails, email)) {
 			return true
 		}
         return false
@@ -63,7 +61,7 @@ class SubscriptionRepository implements Repository<string> {
 
     async save(email: string): Promise<void> {
 
-        if (!this.emailUtils.validateEmail(email)) {
+        if (!SubscriptionRepository.validateEmail(email)) {
 			throw new Error(
 				'You are trying to add invalid email. Please fix it and try again.'
 			)
@@ -75,6 +73,17 @@ class SubscriptionRepository implements Repository<string> {
 		let updatedEmails = JSON.stringify(allEmails)
 		await this.fileWriterService.write(updatedEmails, this.storage)
     }
+
+	private static validateEmail(emailAddress: string): boolean {
+		return Boolean(emailAddress.match(this.regexEmail))
+	}
+
+	private static checkIfEmailExist(emails: string[], emailToCheck: string): boolean {
+		for(let i = 0; i < emails.length; ++ i) {
+			if (emails[i] === emailToCheck) return true
+		}
+		return false
+	}
 
 }
 
