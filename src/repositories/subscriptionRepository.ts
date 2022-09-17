@@ -11,7 +11,7 @@ class SubscriptionRepository implements Repository<string> {
 	private fileWriterService: FileWriterService;
 
     constructor() {
-        this.storage = 'emails.json'
+        this.storage = process.env.DEFAULT_STORAGE as string
 		this.fileReaderService = new FileReaderService()
 		this.fileWriterService = new FileWriterService()
     }
