@@ -24,17 +24,6 @@ class SubscribtionService {
 		}
 	}
 
-	public async unsubscribe(emails: Array<string>): Promise<string[]> {
-		try {
-			const result = await this.subscriptionRepository.bulkDelete(emails)
-			console.log('Emails were deleted successfully')
-			return result
-		} catch(error) {
-			console.log(error)
-			throw new Error(error as string)
-		}
-	}
-
 }
 
 export default SubscribtionService;

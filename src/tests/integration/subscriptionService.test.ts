@@ -29,11 +29,11 @@ describe('POST /subscribe', () => {
     })
 
     afterAll(async () => {
-        try {
-            await subscriptionService.unsubscribe(addedEmails)
-        } catch (error) {
-            console.log(error)
-        }
+        // try {
+        //     await subscriptionService.unsubscribe(addedEmails)
+        // } catch (error) {
+        //     console.log(error)
+        // }
     })
 
     it('should subcribe new email', async () => {
@@ -60,11 +60,11 @@ describe('POST /subscribe', () => {
         newEmails.push(newEmail.email)
 
         let emailsToRemove: string[] = []
-        try {
-            emailsToRemove = await subscriptionService.unsubscribe(newEmails)
-        } catch(error) {
-            console.log(error)
-        }
+        // try {
+        //     emailsToRemove = await subscriptionService.unsubscribe(newEmails)
+        // } catch(error) {
+        //     console.log(error)
+        // }
         expect(emailsToRemove).toStrictEqual(newEmails)
     })
 
