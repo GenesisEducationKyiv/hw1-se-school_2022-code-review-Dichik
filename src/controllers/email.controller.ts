@@ -10,7 +10,7 @@ class EmailController {
 		this.emailService = new SendEmailsService()
 	}
 
-	async sendEmails(request: express.Request, response: express.Response) {
+	async sendEmails(_request: express.Request, response: express.Response) {
 		try {
 			response.status(200).json(await this.emailService.sendBulk())
 		} catch (error) {

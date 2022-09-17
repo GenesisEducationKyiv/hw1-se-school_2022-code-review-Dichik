@@ -60,13 +60,13 @@ class SubscriptionRepository implements Repository<string> {
     }
 
     async save(email: string): Promise<void> {
-
         if (!SubscriptionRepository.validateEmail(email)) {
-			throw new Error(
-				'You are trying to add invalid email. Please fix it and try again.'
-			)
+			throw new InvalidEmailError(InvalidEmailError.INVALID_EMAIL)
 		}
-		this.isExist(email)
+		if(this.isExist(email)) {
+            throw new ExistedEmailError(`${email} already exists`)
+        }
+
 		const allEmails: string[] = await Promise.resolve(this.getAll())
         allEmails.push(email)
 
