@@ -35,14 +35,14 @@ class SendEmailService implements Sender {
 			})
 		} catch (error) {
 			console.log(error)
-			throw Error('Error while sendeing email.')
+			throw new SendEmailError(SendEmailError.SEND_EMAIL_ISSUE)
 		}
 	}
 
 	public async sendBulk(): Promise<void> {
 		let emails = await this.emailsRepository.getAll()
 		const priceForBTC = await this.providerChain.getCurrencyRate()
-		
+
 		const mailSubject = 'BTC price in UAH'
 		const mailBody = `Price for BTC ${priceForBTC} UAH`
 
@@ -60,7 +60,6 @@ class SendEmailService implements Sender {
 			? 'Emails were sent'
 			: `All mails except ${mailsWithIssues} were sent`
 		console.log(message)
-		// response.send(message)
 	}
 
 }

@@ -26,7 +26,7 @@ class CryptoCurrencyChain {
 
     async getCurrencyRate(): Promise<string> {
         if(!this.cryptoCurrencyProvider) {
-            throw new Error('Currency provider is not specified...')
+            throw new InvalidCurrenctProviderError(InvalidCurrenctProviderError.INVALID_PROVIDER)
         }
         const result = await this.cryptoCurrencyProvider.getCurrencyRate('BTC', 'UAH')
         return this.formResponse(result)

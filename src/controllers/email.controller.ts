@@ -14,9 +14,15 @@ class EmailController {
 		try {
 			response.status(200).json(await this.emailService.sendBulk())
 		} catch (error) {
-			response.status(400).json({
-				message: `Couldn't send emails: ${error}`,
-			})
+			if(error instanceof SendEmailError) {
+				response.status(400).json({
+					message: `Couldn't send emails: ${error}`,
+				})
+			} else {
+				response.status(500).json({
+					message: `Invalid error: ${error}`,
+				})
+			}
 		}
 	}
 	
