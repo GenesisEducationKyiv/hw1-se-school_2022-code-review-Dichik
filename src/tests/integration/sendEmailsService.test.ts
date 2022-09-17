@@ -1,4 +1,4 @@
-import SendEmailService from "../../services/emails/sendEmailsService";
+import SendEmailService from "../../services/emails/senders/sendEmailsService";
 
 describe('POST /sendEmails', () => {
 

@@ -1,7 +1,7 @@
-import FileReaderService from '../input_output/fileReaderService';
-import EmailTransporter from './emailTransporter';
+import FileReaderService from '../../input_output/fileReaderService';
+import EmailTransporter from '../transporters/emailTransporter';
 import Sender from './sender.interface';
-import CryptoCurrencyChain from '../rating/chain/cryptoCurrencyChain';
+import CryptoCurrencyChain from '../../rating/chain/cryptoCurrencyChain';
 require('dotenv').config()
 
 class SendEmailService implements Sender {

@@ -1,7 +1,8 @@
 import express from 'express'
-import SubscriptionRepository from '../../repositories/subscriptionRepository'
+import SubscriptionRepository from '../../../repositories/subscriptionRepository'
+import SubscriptionProvider from './subscriptionProvider.interface';
 
-class SubscribtionService {
+class SubscribtionService implements SubscriptionProvider {
 
 	private subscriptionRepository: SubscriptionRepository;
 
@@ -9,7 +10,7 @@ class SubscribtionService {
 		this.subscriptionRepository = new SubscriptionRepository()
 	}
 
-	public async subscribe(request: express.Request, response: express.Response): Promise<string[]> {
+	public async subscribe(request: express.Request, _response: express.Response): Promise<string[]> {
 		if (!request.body || !request.body.email) {
 			throw new Error('Body is required for request.')
 		}

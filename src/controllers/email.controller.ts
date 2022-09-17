@@ -1,6 +1,6 @@
 import express from 'express'
 
-import SendEmailsService from '../services/emails/sendEmailsService'
+import SendEmailsService from '../services/emails/senders/sendEmailsService'
 
 class EmailController {
 

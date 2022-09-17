@@ -1,5 +1,5 @@
 import express from 'express'
-import SubscribtionService from "../services/emails/subscriptionService"
+import SubscribtionService from "../services/emails/subscriptions/subscriptionService"
 
 class SubscriptionController {
 
