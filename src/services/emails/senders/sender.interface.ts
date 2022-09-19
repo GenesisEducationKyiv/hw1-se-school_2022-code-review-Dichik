@@ -1,10 +1,11 @@
+import EmailEntity from "../models/email.entity";
 
-interface Sender {
+interface EmailSender {
 
-	send(recipient: string, mailSubject: string, mailBody: string): Promise<void>
+	send(email: EmailEntity, mailSubject: string, mailBody: string): Promise<void>
 
 	sendBulk(): Promise<void>
 
 }
 
-export default Sender;
+export default EmailSender;

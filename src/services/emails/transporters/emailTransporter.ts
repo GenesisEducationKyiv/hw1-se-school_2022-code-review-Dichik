@@ -2,19 +2,30 @@ import Transporter from './transporter.interface';
 import nodemailer from 'nodemailer';
 require('dotenv').config()
 
-class EmailTransporter implements Transporter {
+class NodeMailer implements Transporter {
 
-	create(): any {
-		const transporter = nodemailer.createTransport({
+	private mailer: any;
+
+	constructor() {
+		this.mailer = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-				user: 'omeluan.dima@gmail.com',
-				pass: 'gyhrpwdwjchaeodu'
+				user: process.env.SENDER_EMAIL,
+				pass: process.env.EMAIL_ACCESS_TOKEN
 			}
 		})
-		return transporter
+	}
+
+	async send(mailOptions: any): Promise<void> {
+		await this.mailer.sendMail(mailOptions, function (error: any, info: { response: string; }) {
+			if (error) {
+				console.log(error)
+			} else {
+				console.log('Email sent: ' + info.response)
+			}
+		})
 	}
 
 }
 
-export default EmailTransporter;
+export default NodeMailer;

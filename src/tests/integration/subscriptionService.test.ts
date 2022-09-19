@@ -1,4 +1,5 @@
 import SubscribtionService from "../../services/emails/subscriptions/subscriptionService";
+import FileReaderService from "../../services/input_output/fileReaderService";
 
 describe('POST /subscribe', () => {
     const date = Date.now()
@@ -42,6 +43,8 @@ describe('POST /subscribe', () => {
         const lastEmail = response.body.data[response.body.data.length-1]
         expect(response.statusCode).toBe(201);
         expect(lastEmail).toBe(newEmail.email);
+
+        
     })
 
     it('shouldn\'t subcribe new invalid email', async () => {

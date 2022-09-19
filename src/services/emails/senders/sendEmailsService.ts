@@ -1,38 +1,27 @@
-import EmailTransporter from '../transporters/emailTransporter';
-import Sender from './sender.interface';
-import CryptoCurrencyChain from '../../rating/chain/cryptoCurrencyChain';
+import EmailSender from './sender.interface';
 import SubscriptionRepository from '../../../repositories/subscriptionRepository';
+import EmailEntity from '../models/email.entity';
+import Transporter from '../transporters/transporter.interface';
+import NodeMailer from '../transporters/emailTransporter';
+import NodemailerAdapter from './adapters/nodemailerAdapter';
 require('dotenv').config()
 
-class SendEmailService implements Sender {
+class SendEmailService implements EmailSender {
 
-    private providerChain: CryptoCurrencyChain;
 	private emailsRepository: SubscriptionRepository;
-	private emailTrasnporter: any;
-
+	private emailAdapter: NodemailerAdapter;
+	private mailer: Transporter;
 
 	constructor() {
-		this.providerChain = new CryptoCurrencyChain();
 		this.emailsRepository = new SubscriptionRepository();
-		this.emailTrasnporter = new EmailTransporter().create();
+		this.emailAdapter = new NodemailerAdapter()
+		this.mailer = new NodeMailer();
 	}
 
-	public async send(recipient: string, mailSubject: string, mailBody: string): Promise<void> {
-		let mailOptions = {
-			from: process.env.SENDER_EMAIL,
-			to: recipient,
-			subject: mailSubject,
-			text: mailBody,
-		}
-	
+	public async send(email: EmailEntity): Promise<void> {
 		try {
-			await this.emailTrasnporter.sendMail(mailOptions, function (error: any, info: { response: string; }) {
-				if (error) {
-					console.log(error)
-				} else {
-					console.log('Email sent: ' + info.response)
-				}
-			})
+			const mailOptions = this.emailAdapter.getMailOptions(email)
+			await this.mailer.send(mailOptions)
 		} catch (error) {
 			console.log(error)
 			throw new SendEmailError(SendEmailError.SEND_EMAIL_ISSUE)
@@ -40,20 +29,14 @@ class SendEmailService implements Sender {
 	}
 
 	public async sendBulk(): Promise<void> {
-		let emails = await this.emailsRepository.getAll()
-		const priceForBTC = await this.providerChain.getCurrencyRate()
-
-		const mailSubject = 'BTC price in UAH'
-		const mailBody = `Price for BTC ${priceForBTC} UAH`
-
+		let emails: Array<EmailEntity> = await this.emailsRepository.getAll()
 		const mailsWithIssues: string[] = []
 		for (let i = 0; i < emails.length; ++i) {
-			let recipient: string = emails[i]
 			try {
-				await this.send(recipient, mailSubject, mailBody)
+				await this.send(emails[i])
 			} catch (error) {
 				console.log(error)
-				mailsWithIssues.push(recipient)
+				mailsWithIssues.push(emails[i].getAddress())
 			}
 		}
 		let message = !mailsWithIssues.length

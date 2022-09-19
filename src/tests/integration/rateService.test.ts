@@ -26,11 +26,17 @@ describe('GET /rate', () => {
     })
 
     it('test caching with timeout >5000ms', async () => {
+        
         // TODO after adding caching to rate service
     })
 
     it('test timout with <5000ms', async () => {
-        // TODO after adding caching to rate service
+        const response1 = await request(baseURL).get('/rate')
+        const result1 = parseFloat(response1.body)
+
+        const response2 = await request(baseURL).get('/rate')
+        const result2 = parseFloat(response2.body)
+        expect(result1).toBe(result2)
     })
 
 })
