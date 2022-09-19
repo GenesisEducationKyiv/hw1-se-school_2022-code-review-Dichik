@@ -1,6 +1,5 @@
 import CryptoCurrencyChain from "../../rating/chain/cryptoCurrencyChain";
 import EmailEntity from "../models/email.entity";
-import EmailTransporter from "../transporters/emailTransporter";
 import EmailAdapter from "./emailAdapter.interface";
 
 class NodemailerAdapter implements EmailAdapter {

@@ -1,26 +1,26 @@
 import EmailSender from './sender.interface';
 import SubscriptionRepository from '../../../repositories/subscriptionRepository';
 import EmailEntity from '../models/email.entity';
-import SendEmailAdapter from './sendEmailAdapter';
 import Transporter from '../transporters/transporter.interface';
 import NodeMailer from '../transporters/emailTransporter';
+import NodemailerAdapter from './nodemailerAdapter';
 require('dotenv').config()
 
 class SendEmailService implements EmailSender {
 
 	private emailsRepository: SubscriptionRepository;
-	private emailAdapter: SendEmailAdapter;
+	private emailAdapter: NodemailerAdapter;
 	private mailer: Transporter;
 
 	constructor() {
 		this.emailsRepository = new SubscriptionRepository();
-		this.emailAdapter = new SendEmailAdapter()
+		this.emailAdapter = new NodemailerAdapter()
 		this.mailer = new NodeMailer();
 	}
 
 	public async send(email: EmailEntity): Promise<void> {
 		try {
-			const mailOptions = this.emailAdapter.getMailOptions()
+			const mailOptions = this.emailAdapter.getMailOptions(email)
 			await this.mailer.send(mailOptions)
 		} catch (error) {
 			console.log(error)
