@@ -3,7 +3,7 @@ import SubscriptionRepository from '../../../repositories/subscriptionRepository
 import EmailEntity from '../models/email.entity';
 import Transporter from '../transporters/transporter.interface';
 import NodeMailer from '../transporters/emailTransporter';
-import NodemailerAdapter from './nodemailerAdapter';
+import NodemailerAdapter from './adapters/nodemailerAdapter';
 require('dotenv').config()
 
 class SendEmailService implements EmailSender {

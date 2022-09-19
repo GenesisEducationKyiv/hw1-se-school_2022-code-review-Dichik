@@ -1,4 +1,4 @@
-import EmailEntity from "../models/email.entity";
+import EmailEntity from "../../models/email.entity";
 
 interface EmailAdapter {
     getMailOptions(email: EmailEntity): any;
