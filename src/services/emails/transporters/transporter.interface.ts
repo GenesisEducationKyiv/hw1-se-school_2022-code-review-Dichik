@@ -1,6 +1,6 @@
 
 interface Transporter {
-    create(): any 
+    send(mailOptions: any): Promise<any> 
 }
 
 export default Transporter;

@@ -1,4 +1,4 @@
-import EmailEntity from "../services/emails/models/email";
+import EmailEntity from "../services/emails/models/email.entity";
 import FileReaderService from "../services/input_output/fileReaderService";
 import FileWriterService from "../services/input_output/fileWriterService";
 import Repository from "./repository.interface";

@@ -1,6 +1,6 @@
 import express, { response } from 'express'
 import SubscriptionRepository from '../../../repositories/subscriptionRepository'
-import EmailEntity from '../models/email';
+import EmailEntity from '../models/email.entity';
 import SubscriptionProvider from './subscriptionProvider.interface';
 
 class SubscribtionService implements SubscriptionProvider {
