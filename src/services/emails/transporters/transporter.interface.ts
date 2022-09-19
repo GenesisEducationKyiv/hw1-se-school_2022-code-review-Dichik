@@ -1,6 +1,6 @@
 
 interface Transporter {
-    create(): Promise<any> 
+    create(): any 
 }
 
 export default Transporter;

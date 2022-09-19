@@ -1,10 +1,11 @@
 import EmailTransporter from '../transporters/emailTransporter';
-import Sender from './sender.interface';
+import EmailSender from './sender.interface';
 import CryptoCurrencyChain from '../../rating/chain/cryptoCurrencyChain';
 import SubscriptionRepository from '../../../repositories/subscriptionRepository';
+import EmailEntity from '../models/email.entity';
 require('dotenv').config()
 
-class SendEmailService implements Sender {
+class SendEmailService implements EmailSender {
 
     private providerChain: CryptoCurrencyChain;
 	private emailsRepository: SubscriptionRepository;
@@ -17,10 +18,10 @@ class SendEmailService implements Sender {
 		this.emailTrasnporter = new EmailTransporter().create();
 	}
 
-	public async send(recipient: string, mailSubject: string, mailBody: string): Promise<void> {
+	public async send(email: EmailEntity, mailSubject: string, mailBody: string): Promise<void> {
 		let mailOptions = {
 			from: process.env.SENDER_EMAIL,
-			to: recipient,
+			to: email.getAddress(),
 			subject: mailSubject,
 			text: mailBody,
 		}
@@ -40,7 +41,7 @@ class SendEmailService implements Sender {
 	}
 
 	public async sendBulk(): Promise<void> {
-		let emails = await this.emailsRepository.getAll()
+		let emails: Array<EmailEntity> = await this.emailsRepository.getAll()
 		const priceForBTC = await this.providerChain.getCurrencyRate()
 
 		const mailSubject = 'BTC price in UAH'
@@ -48,12 +49,11 @@ class SendEmailService implements Sender {
 
 		const mailsWithIssues: string[] = []
 		for (let i = 0; i < emails.length; ++i) {
-			let recipient: string = emails[i]
 			try {
-				await this.send(recipient, mailSubject, mailBody)
+				await this.send(emails[i], mailSubject, mailBody)
 			} catch (error) {
 				console.log(error)
-				mailsWithIssues.push(recipient)
+				mailsWithIssues.push(emails[i].getAddress())
 			}
 		}
 		let message = !mailsWithIssues.length

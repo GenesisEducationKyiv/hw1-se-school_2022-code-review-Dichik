@@ -8,8 +8,8 @@ class EmailTransporter implements Transporter {
 		const transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-				user: 'omeluan.dima@gmail.com',
-				pass: 'gyhrpwdwjchaeodu'
+				user: process.env.SENDER_EMAIL,
+				pass: process.env.EMAIL_ACCESS_TOKEN
 			}
 		})
 		return transporter
