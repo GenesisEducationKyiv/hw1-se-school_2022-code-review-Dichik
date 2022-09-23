@@ -9,7 +9,7 @@ require('dotenv').config()
 class App {
 
     private app: any = express()
-    private port: number = 8081
+    private port = 8081
     private rateController: CoinmarketRateController;
     private emailController: EmailController;
     private subscriptionController: SubscriptionController;

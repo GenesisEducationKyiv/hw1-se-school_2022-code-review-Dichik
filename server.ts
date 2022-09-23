@@ -1,6 +1,6 @@
 import App from "./src/app"
 
-let app = new App()
+const app = new App()
 
 app.initRoutes()
 app.listen()

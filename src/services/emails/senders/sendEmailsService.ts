@@ -29,7 +29,7 @@ class SendEmailService implements EmailSender {
 	}
 
 	public async sendBulk(): Promise<void> {
-		let emails: Array<EmailEntity> = await this.emailsRepository.getAll()
+		const emails: Array<EmailEntity> = await this.emailsRepository.getAll()
 		const mailsWithIssues: string[] = []
 		for (let i = 0; i < emails.length; ++i) {
 			try {
@@ -39,7 +39,7 @@ class SendEmailService implements EmailSender {
 				mailsWithIssues.push(emails[i].getAddress())
 			}
 		}
-		let message = !mailsWithIssues.length
+		const message = !mailsWithIssues.length
 			? 'Emails were sent'
 			: `All mails except ${mailsWithIssues} were sent`
 		console.log(message)

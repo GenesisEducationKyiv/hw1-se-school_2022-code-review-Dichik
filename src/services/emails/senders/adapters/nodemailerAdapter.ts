@@ -16,7 +16,7 @@ class NodemailerAdapter implements EmailAdapter {
 		const mailSubject = 'BTC price in UAH'
 		const mailBody = `Price for BTC ${priceForBTC} UAH`
 
-        let mailOptions = {
+        const mailOptions = {
 			from: process.env.SENDER_EMAIL,
 			to: email.getAddress(),
 			subject: mailSubject,

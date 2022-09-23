@@ -5,7 +5,7 @@ import Repository from "./repository.interface";
 
 
 class SubscriptionRepository implements Repository<EmailEntity> {
-    private static regexEmail: string = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+    private static regexEmail = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
     
     private storage: string;
 	private fileReaderService: FileReaderService;
@@ -17,23 +17,23 @@ class SubscriptionRepository implements Repository<EmailEntity> {
 		this.fileWriterService = new FileWriterService()
     }
 
-    delete(id: EmailEntity): EmailEntity {
+    delete(_id: EmailEntity): EmailEntity {
         throw new Error("Method not implemented.");
     }
     
     async bulkDelete(emails: Array<EmailEntity>): Promise<Array<EmailEntity>> {
-        let emailsToRemove: Array<EmailEntity> = []
-        let emailsToSave: any = []
+        const emailsToRemove: Array<EmailEntity> = []
+        const emailsToSave: any = []
         const allEmails = await Promise.resolve(this.getAll())
 
 		for(let i = 0; i < allEmails.length; ++ i) {
-			let email = allEmails[i]
+			const email = allEmails[i]
 			if (!SubscriptionRepository.checkIfEmailExist(emails, email)) {
                 emailsToSave.push(email)
             } else emailsToRemove.push(email)
 		}
 
-        let updatedEmails = JSON.stringify(emailsToSave)
+        const updatedEmails = JSON.stringify(emailsToSave)
         await this.fileWriterService.write(updatedEmails, this.storage)
 		return emailsToRemove
     }
@@ -55,7 +55,7 @@ class SubscriptionRepository implements Repository<EmailEntity> {
         return allEmails
     }
 
-    getById(id: number): EmailEntity {
+    getById(_id: number): EmailEntity {
         throw new Error("Method not implemented.");
     }
 
@@ -70,7 +70,7 @@ class SubscriptionRepository implements Repository<EmailEntity> {
 		const allEmails: Array<EmailEntity> = await Promise.resolve(this.getAll())
         allEmails.push(email)
 
-		let updatedEmails = JSON.stringify(allEmails)
+		const updatedEmails = JSON.stringify(allEmails)
 		await this.fileWriterService.write(updatedEmails, this.storage)
     }
 

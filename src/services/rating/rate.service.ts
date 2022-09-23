@@ -5,7 +5,7 @@ class RateService {
     private providerChain: CryptoCurrencyChain;
     private lastFetchingResult: string;
     private lastFetchingTime: number = Date.now();
-    private CACHING_TIME: number = 300000; // TODO move to env file
+    private CACHING_TIME = 300000; // TODO move to env file
 
     constructor() {
         this.providerChain = new CryptoCurrencyChain()
