@@ -1,4 +1,5 @@
 import express from 'express'
+import { SendEmailError } from '../services/emails/senders/exceptions/sendEmailError';
 
 import SendEmailsService from '../services/emails/senders/sendEmailsService'
 

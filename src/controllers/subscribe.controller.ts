@@ -1,4 +1,6 @@
 import express from 'express'
+import { ExistedEmailError } from '../services/emails/subscriptions/exceptions/existedEmailError';
+import { InvalidEmailError } from '../services/emails/subscriptions/exceptions/invalidEmailError';
 import SubscribtionService from "../services/emails/subscriptions/subscriptionService"
 
 class SubscriptionController {

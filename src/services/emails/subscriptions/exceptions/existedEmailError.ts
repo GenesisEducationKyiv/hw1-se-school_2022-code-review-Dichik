@@ -1,4 +1,4 @@
-class ExistedEmailError extends Error {
+export class ExistedEmailError extends Error {
 
     constructor(message: string) {
         super(message);

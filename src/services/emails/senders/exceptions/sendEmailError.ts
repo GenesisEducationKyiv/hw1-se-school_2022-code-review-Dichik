@@ -1,4 +1,4 @@
-class SendEmailError extends Error {
+export class SendEmailError extends Error {
 
     public static SEND_EMAIL_ISSUE = 'Error while sendeing email.'
 
