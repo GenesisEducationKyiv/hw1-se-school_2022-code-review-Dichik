@@ -1,11 +1,10 @@
-import SubscribtionService from "../../services/emails/subscriptions/subscriptionService";
-import FileReaderService from "../../services/input_output/fileReaderService";
+import SubscribtionService from "../../services/emails/subscriptions/subscription.service";
 
 describe('POST /subscribe', () => {
     const date = Date.now()
     const request = require('supertest')
     const baseURL = "http://localhost:8081"
-    let addedEmails: Array<string> = [];
+    const addedEmails: Array<string> = [];
     let subscriptionService: SubscribtionService;
     
 
@@ -58,11 +57,11 @@ describe('POST /subscribe', () => {
     })
 
     it('should unsubscribe email', async () => {
-        const response = await request(baseURL).post("/subscribe").send(newEmail)
-        let newEmails: string[] = [];
+        await request(baseURL).post("/subscribe").send(newEmail)
+        const newEmails: string[] = [];
         newEmails.push(newEmail.email)
 
-        let emailsToRemove: string[] = []
+        const emailsToRemove: string[] = []
         // try {
         //     emailsToRemove = await subscriptionService.unsubscribe(newEmails)
         // } catch(error) {

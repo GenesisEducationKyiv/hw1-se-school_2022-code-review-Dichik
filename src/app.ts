@@ -4,12 +4,10 @@ import CoinmarketRateController from './controllers/rate.controller'
 import EmailController from './controllers/email.controller'
 import SubscriptionController from './controllers/subscribe.controller'
 
-require('dotenv').config()
-
 class App {
 
     private app: any = express()
-    private port: number = 8081
+    private port = 8081
     private rateController: CoinmarketRateController;
     private emailController: EmailController;
     private subscriptionController: SubscriptionController;

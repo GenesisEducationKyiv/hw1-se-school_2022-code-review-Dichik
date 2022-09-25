@@ -1,3 +1,4 @@
+import { InvalidCurrenctProviderError } from "../exceptions/invalidCurrencyProvider.error";
 import FactoryRate from "../factory/factoryRate";
 import ProviderChain from "./providerChain.interface";
 
@@ -13,8 +14,8 @@ class CryptoCurrencyChain {
     }
 
     private initProviders(): void {
-        let providers: string[] = process.env.CRYPTO_CURRENCY_PROVIDER.split(' ')
-        let chain: Array<ProviderChain> = []
+        const providers: string[] = process.env.CRYPTO_CURRENCY_PROVIDER.split(' ')
+        const chain: Array<ProviderChain> = []
         for(let i = 0; i < providers.length; ++ i) {
             chain.push(this.factoryRate.getByName(providers[i]))
         }

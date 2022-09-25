@@ -1,6 +1,6 @@
-import express, { response } from 'express'
-import SubscriptionRepository from '../../../repositories/subscriptionRepository'
-import EmailEntity from '../models/email.entity';
+import express from 'express'
+import SubscriptionRepository from '../../../repositories/subscription.repository'
+import { EmailEntity } from '../models/email.entity';
 import SubscriptionProvider from './subscriptionProvider.interface';
 
 class SubscribtionService implements SubscriptionProvider {
@@ -17,7 +17,7 @@ class SubscribtionService implements SubscriptionProvider {
 		}
 		const email = new EmailEntity(request.body.email)
 		await this.subscriptionRepository.save(email)
-		console.log(`Email: ${email} - was successfully saved`)
+		console.log(`Email: ${email.address} - was successfully saved`)
 		return this.subscriptionRepository.getAll()
 	}
 

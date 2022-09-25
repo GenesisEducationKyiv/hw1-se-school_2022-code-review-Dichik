@@ -1,4 +1,4 @@
-import FileReaderService from "../../services/input_output/fileReaderService"
+import FileReaderService from "../../services/input_output/fileReader.service"
 
 describe('Testing fileReaderService', () => {
 

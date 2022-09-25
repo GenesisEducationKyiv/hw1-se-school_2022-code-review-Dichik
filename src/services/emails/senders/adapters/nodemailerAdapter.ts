@@ -1,5 +1,5 @@
 import CryptoCurrencyChain from "../../../rating/chain/cryptoCurrencyChain";
-import EmailEntity from "../../models/email.entity";
+import { EmailEntity } from "../../models/email.entity";
 import EmailAdapter from "./emailAdapter.interface";
 
 class NodemailerAdapter implements EmailAdapter {
@@ -11,14 +11,15 @@ class NodemailerAdapter implements EmailAdapter {
     }
 
     async getMailOptions(email: EmailEntity): Promise<any> {
-        const priceForBTC = await this.providerChain.getCurrencyRate()
+        const priceForBTC = await Promise.resolve(this.providerChain.getCurrencyRate())
 
 		const mailSubject = 'BTC price in UAH'
 		const mailBody = `Price for BTC ${priceForBTC} UAH`
+        const recipient: string = email.address
 
-        let mailOptions = {
+        const mailOptions = {
 			from: process.env.SENDER_EMAIL,
-			to: email.getAddress(),
+			to: recipient,
 			subject: mailSubject,
 			text: mailBody,
 		}

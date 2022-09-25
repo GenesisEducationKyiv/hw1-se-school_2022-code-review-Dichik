@@ -1,19 +1,13 @@
 
-class EmailEntity {
-    private address: string;
+export class EmailEntity {
+    private _address: string;
 
     constructor(address: string) {
-        this.address = address;
+        this._address = address;
     }
 
-    setAddress(address: string) {
-        this.address = address;
-    }
-
-    getAddress(): string {
-        return this.address
+    public get address(): string {
+        return this._address
     }
 
 }
-
-export default EmailEntity;
