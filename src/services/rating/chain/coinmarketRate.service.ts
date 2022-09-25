@@ -1,4 +1,3 @@
-
 const Coinmarketcap = require('coinmarketcap-api');
 import ProviderChain from './providerChain.interface';
 

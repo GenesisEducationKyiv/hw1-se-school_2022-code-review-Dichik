@@ -5,7 +5,6 @@ import NodeMailer from '../transporters/emailTransporter';
 import NodemailerAdapter from './adapters/nodemailerAdapter';
 import { SendEmailError } from './exceptions/sendEmail.error';
 import { EmailEntity } from '../models/email.entity';
-require('dotenv').config()
 
 class SendEmailService implements EmailSender {
 

@@ -4,8 +4,6 @@ import CoinmarketRateController from './controllers/rate.controller'
 import EmailController from './controllers/email.controller'
 import SubscriptionController from './controllers/subscribe.controller'
 
-require('dotenv').config()
-
 class App {
 
     private app: any = express()

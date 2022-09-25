@@ -62,7 +62,7 @@ class SubscriptionRepository implements Repository<EmailEntity> {
         if (!SubscriptionRepository.validateEmail(email)) {
 			throw new InvalidEmailError(InvalidEmailError.INVALID_EMAIL)
 		}
-        let isExist: boolean = await this.isExist(email)
+        const isExist: boolean = await this.isExist(email)
 		if(isExist) {
             throw new ExistedEmailError(`${email.address} already exists`)
         }
