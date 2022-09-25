@@ -1,6 +1,5 @@
 import Transporter from './transporter.interface';
 import nodemailer from 'nodemailer';
-require('dotenv').config()
 
 class NodeMailer implements Transporter {
 

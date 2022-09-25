@@ -1,10 +1,10 @@
 import EmailSender from './sender.interface';
 import SubscriptionRepository from '../../../repositories/subscription.repository';
-import EmailEntity from '../models/email.entity';
 import Transporter from '../transporters/transporter.interface';
 import NodeMailer from '../transporters/emailTransporter';
 import NodemailerAdapter from './adapters/nodemailerAdapter';
 import { SendEmailError } from './exceptions/sendEmail.error';
+import { EmailEntity } from '../models/email.entity';
 require('dotenv').config()
 
 class SendEmailService implements EmailSender {
@@ -21,7 +21,7 @@ class SendEmailService implements EmailSender {
 
 	public async send(email: EmailEntity): Promise<void> {
 		try {
-			const mailOptions = this.emailAdapter.getMailOptions(email)
+			const mailOptions = await Promise.resolve(this.emailAdapter.getMailOptions(email))
 			await this.mailer.send(mailOptions)
 		} catch (error) {
 			console.log(error)
@@ -37,7 +37,7 @@ class SendEmailService implements EmailSender {
 				await this.send(emails[i])
 			} catch (error) {
 				console.log(error)
-				mailsWithIssues.push(emails[i].getAddress())
+				mailsWithIssues.push(emails[i].address)
 			}
 		}
 		const message = !mailsWithIssues.length

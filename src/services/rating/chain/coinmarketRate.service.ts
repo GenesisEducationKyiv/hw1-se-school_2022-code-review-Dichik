@@ -1,7 +1,6 @@
 
 const Coinmarketcap = require('coinmarketcap-api');
 import ProviderChain from './providerChain.interface';
-require('dotenv').config()
 
 class CoinmarketRateChain implements ProviderChain {
 

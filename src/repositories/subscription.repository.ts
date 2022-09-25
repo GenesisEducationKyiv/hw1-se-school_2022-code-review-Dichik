@@ -1,4 +1,4 @@
-import EmailEntity from "../services/emails/models/email.entity";
+import { EmailEntity } from "../services/emails/models/email.entity";
 import { ExistedEmailError } from "../services/emails/subscriptions/exceptions/existedEmail.error";
 import { InvalidEmailError } from "../services/emails/subscriptions/exceptions/invalidEmail.error";
 import FileReaderService from "../services/input_output/fileReader.service";
@@ -30,7 +30,7 @@ class SubscriptionRepository implements Repository<EmailEntity> {
 
 		for(let i = 0; i < allEmails.length; ++ i) {
 			const email = allEmails[i]
-			if (!SubscriptionRepository.checkIfEmailExist(emails, email)) {
+			if (!SubscriptionRepository.isEmailExist(emails, email)) {
                 emailsToSave.push(email)
             } else emailsToRemove.push(email)
 		}
@@ -41,15 +41,12 @@ class SubscriptionRepository implements Repository<EmailEntity> {
     }
 
     async isExist(email: EmailEntity): Promise<boolean> {
-        const allEmails = await this.getAll()
-        if (SubscriptionRepository.checkIfEmailExist(allEmails, email)) {
-			return true
-		}
-        return false
+        const allEmails = await Promise.resolve(this.getAll())
+        return SubscriptionRepository.isEmailExist(allEmails, email)
     }
     
     async getAll(): Promise<Array<EmailEntity>> {
-        const dataFromFileJson = await this.fileReaderService.read(this.storage)
+        const dataFromFileJson = await Promise.resolve(this.fileReaderService.read(this.storage))
 		if (!dataFromFileJson) {
 			throw new Error("Couldn't load emails from file")
 		}
@@ -65,8 +62,9 @@ class SubscriptionRepository implements Repository<EmailEntity> {
         if (!SubscriptionRepository.validateEmail(email)) {
 			throw new InvalidEmailError(InvalidEmailError.INVALID_EMAIL)
 		}
-		if(this.isExist(email)) {
-            throw new ExistedEmailError(`${email} already exists`)
+        let isExist: boolean = await this.isExist(email)
+		if(isExist) {
+            throw new ExistedEmailError(`${email.address} already exists`)
         }
 
 		const allEmails: Array<EmailEntity> = await Promise.resolve(this.getAll())
@@ -77,13 +75,13 @@ class SubscriptionRepository implements Repository<EmailEntity> {
     }
 
 	private static validateEmail(email: EmailEntity): boolean {
-        const emailAddress = email.getAddress()
+        const emailAddress = email.address
 		return Boolean(emailAddress.match(this.regexEmail))
 	}
 
-	private static checkIfEmailExist(emails: Array<EmailEntity>, emailToCheck: EmailEntity): boolean {
+	private static isEmailExist(emails: Array<EmailEntity>, emailToCheck: EmailEntity): boolean {
 		for(let i = 0; i < emails.length; ++ i) {
-			if (emails[i].getAddress() === emailToCheck.getAddress()) return true
+			if (emails[i].address === emailToCheck.address) return true
 		}
 		return false
 	}
