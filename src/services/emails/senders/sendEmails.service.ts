@@ -1,10 +1,10 @@
 import EmailSender from './sender.interface';
-import SubscriptionRepository from '../../../repositories/subscriptionRepository';
+import SubscriptionRepository from '../../../repositories/subscription.repository';
 import EmailEntity from '../models/email.entity';
 import Transporter from '../transporters/transporter.interface';
 import NodeMailer from '../transporters/emailTransporter';
 import NodemailerAdapter from './adapters/nodemailerAdapter';
-import { SendEmailError } from './exceptions/sendEmailError';
+import { SendEmailError } from './exceptions/sendEmail.error';
 require('dotenv').config()
 
 class SendEmailService implements EmailSender {

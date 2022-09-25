@@ -1,4 +1,4 @@
-import FileWriterService from "../../services/input_output/fileWriterService"
+import FileWriterService from "../../services/input_output/fileWriter.service"
 
 describe('Test FileWriterService', () => {
 

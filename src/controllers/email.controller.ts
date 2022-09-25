@@ -1,7 +1,7 @@
 import express from 'express'
-import { SendEmailError } from '../services/emails/senders/exceptions/sendEmailError';
+import { SendEmailError } from '../services/emails/senders/exceptions/sendEmail.error';
 
-import SendEmailsService from '../services/emails/senders/sendEmailsService'
+import SendEmailsService from '../services/emails/senders/sendEmails.service'
 
 class EmailController {
 

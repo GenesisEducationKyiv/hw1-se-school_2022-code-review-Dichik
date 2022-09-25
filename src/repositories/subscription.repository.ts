@@ -1,8 +1,8 @@
 import EmailEntity from "../services/emails/models/email.entity";
-import { ExistedEmailError } from "../services/emails/subscriptions/exceptions/existedEmailError";
-import { InvalidEmailError } from "../services/emails/subscriptions/exceptions/invalidEmailError";
-import FileReaderService from "../services/input_output/fileReaderService";
-import FileWriterService from "../services/input_output/fileWriterService";
+import { ExistedEmailError } from "../services/emails/subscriptions/exceptions/existedEmail.error";
+import { InvalidEmailError } from "../services/emails/subscriptions/exceptions/invalidEmail.error";
+import FileReaderService from "../services/input_output/fileReader.service";
+import FileWriterService from "../services/input_output/fileWriter.service";
 import Repository from "./repository.interface";
 
 

@@ -1,4 +1,4 @@
-import SubscribtionService from "../../services/emails/subscriptions/subscriptionService";
+import SubscribtionService from "../../services/emails/subscriptions/subscription.service";
 
 describe('POST /subscribe', () => {
     const date = Date.now()

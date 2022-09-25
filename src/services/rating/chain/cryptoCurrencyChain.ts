@@ -1,4 +1,4 @@
-import { InvalidCurrenctProviderError } from "../exceptions/invalidCurrencyProviderError";
+import { InvalidCurrenctProviderError } from "../exceptions/invalidCurrencyProvider.error";
 import FactoryRate from "../factory/factoryRate";
 import ProviderChain from "./providerChain.interface";
 

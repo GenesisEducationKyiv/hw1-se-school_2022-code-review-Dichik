@@ -1,5 +1,5 @@
-import express, { response } from 'express'
-import SubscriptionRepository from '../../../repositories/subscriptionRepository'
+import express from 'express'
+import SubscriptionRepository from '../../../repositories/subscription.repository'
 import EmailEntity from '../models/email.entity';
 import SubscriptionProvider from './subscriptionProvider.interface';
 
