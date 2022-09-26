@@ -6,7 +6,7 @@ import SubscriptionController from './controllers/subscribe.controller'
 class App {
 
     private app: any = express()
-    private port = 8081
+    private port = 9081
     private emailController: EmailController;
     private subscriptionController: SubscriptionController;
 
