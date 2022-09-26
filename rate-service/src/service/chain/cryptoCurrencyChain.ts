@@ -14,9 +14,9 @@ class CryptoCurrencyChain {
     }
 
     private initProviders(): void {
-        const providers: string[] = process.env.CRYPTO_CURRENCY_PROVIDER.split(' ')
+        const providers: string[] = process.env.CRYPTO_CURRENCY_PROVIDER?.split(' ')
         const chain: Array<ProviderChain> = []
-        for(let i = 0; i < providers.length; ++ i) {
+        for(let i = 0; i < providers?.length; ++ i) {
             chain.push(this.factoryRate.getByName(providers[i]))
         }
         for(let i = 0; i < chain.length - 1; ++ i) {

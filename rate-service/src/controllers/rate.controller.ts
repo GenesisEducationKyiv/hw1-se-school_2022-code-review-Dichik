@@ -1,5 +1,5 @@
 import express from 'express'
-import RateService from '../services/rating/rate.service';
+import RateService from '../service/rate.service';
 
 class RateController {
 

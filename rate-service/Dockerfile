@@ -1,6 +1,6 @@
-FROM node:10
+FROM node:latest
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -9,4 +9,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 8081
-CMD [ "ts-node", "server.ts" ]
+
+CMD [ "npm", "start" ]
