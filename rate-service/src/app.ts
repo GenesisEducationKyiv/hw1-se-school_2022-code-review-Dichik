@@ -1,8 +1,8 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import CoinmarketRateController from './controllers/rate.controller'
-import EmailController from './controllers/email.controller'
-import SubscriptionController from './controllers/subscribe.controller'
+import EmailController from '../../subscription-service/src/controllers/email.controller'
+import SubscriptionController from '../../subscription-service/src/controllers/subscribe.controller'
 
 class App {
 

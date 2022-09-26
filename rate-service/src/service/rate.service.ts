@@ -9,11 +9,11 @@ class RateService {
 
     constructor() {
         this.providerChain = new CryptoCurrencyChain()
-        this.lastFetchingResult = null
+        this.lastFetchingResult = ''
     }
 
     async rate(): Promise<string> {
-        if(Date.now() - this.lastFetchingTime < this.CACHING_TIME && this.lastFetchingResult !== null) {
+        if(Date.now() - this.lastFetchingTime < this.CACHING_TIME && this.lastFetchingResult !== '') {
             return this.lastFetchingResult
         }
         this.lastFetchingResult = await this.providerChain.getCurrencyRate()
