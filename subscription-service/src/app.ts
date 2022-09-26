@@ -1,6 +1,5 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import CoinmarketRateController from '../../rate-service/src/controllers/rate.controller'
 import EmailController from './controllers/email.controller'
 import SubscriptionController from './controllers/subscribe.controller'
 
@@ -8,7 +7,6 @@ class App {
 
     private app: any = express()
     private port = 8081
-    private rateController: CoinmarketRateController;
     private emailController: EmailController;
     private subscriptionController: SubscriptionController;
 
@@ -16,16 +14,11 @@ class App {
         this.app.use(bodyParser.urlencoded({ extended: true }))
         this.app.use(bodyParser.json())
         this.app.use(bodyParser.raw())
-        this.rateController = new CoinmarketRateController()
         this.emailController = new EmailController()
         this.subscriptionController = new SubscriptionController()
     }
 
     initRoutes() {
-        this.app.get('/rate', (request: express.Request, response: express.Response) => {
-            this.rateController.rate(request, response)
-        })
-        
         this.app.post('/subscribe', (request: express.Request, response: express.Response) => {
             this.subscriptionController.subscribe(request, response)
         })
