@@ -4,11 +4,10 @@ import EmailController from './controllers/email.controller'
 import SubscriptionController from './controllers/subscribe.controller'
 
 class App {
-
     private app: any = express()
     private port = 9081
-    private emailController: EmailController;
-    private subscriptionController: SubscriptionController;
+    private emailController: EmailController
+    private subscriptionController: SubscriptionController
 
     constructor() {
         this.app.use(bodyParser.urlencoded({ extended: true }))
@@ -19,13 +18,19 @@ class App {
     }
 
     initRoutes() {
-        this.app.post('/subscribe', (request: express.Request, response: express.Response) => {
-            this.subscriptionController.subscribe(request, response)
-        })
-        
-        this.app.post('/sendEmails', (request: express.Request, response: express.Response) => {
-            this.emailController.sendEmails(request, response)
-        })
+        this.app.post(
+            '/subscribe',
+            (request: express.Request, response: express.Response) => {
+                this.subscriptionController.subscribe(request, response)
+            }
+        )
+
+        this.app.post(
+            '/sendEmails',
+            (request: express.Request, response: express.Response) => {
+                this.emailController.sendEmails(request, response)
+            }
+        )
     }
 
     listen() {
@@ -40,7 +45,6 @@ class App {
             this.app.close()
         })
     }
-
 }
 
 export default App

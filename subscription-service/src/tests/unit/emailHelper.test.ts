@@ -1,4 +1,3 @@
-
 // describe('Test email helper\'s functions', () => {
 //     const invalidEmail = 'email@.com'
 //     const invalidEmailWithouDog = '123gmail.com'
@@ -13,7 +12,7 @@
 
 //     test('Test finding email in the list of emails', () => {
 //         const emailList = [
-//             validEmail, 
+//             validEmail,
 //             "one.two@gmail.com",
 //             "three.four@ukr.net"
 //         ]

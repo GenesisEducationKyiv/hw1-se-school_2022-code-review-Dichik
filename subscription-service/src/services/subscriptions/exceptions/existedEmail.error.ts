@@ -1,8 +1,7 @@
 export class ExistedEmailError extends Error {
-
     constructor(message: string) {
-        super(message);
+        super(message)
 
-        Object.setPrototypeOf(this, ExistedEmailError.prototype);
+        Object.setPrototypeOf(this, ExistedEmailError.prototype)
     }
 }

@@ -1,18 +1,15 @@
-
 interface Repository<T> {
+    isExist(object: T): Promise<boolean>
 
-    isExist(object: T): Promise<boolean>;
+    getAll(): Promise<Array<T>>
 
-    getAll(): Promise<Array<T>>;
+    getById(id: number): T
 
-    getById(id: number): T;
+    delete(id: T): T
 
-    delete(id: T): T;
+    bulkDelete(ids: Array<T>): Promise<Array<T>>
 
-    bulkDelete(ids: Array<T>): Promise<Array<T>>;
-
-    save(object: T): Promise<void>;
-
+    save(object: T): Promise<void>
 }
 
-export default Repository;
+export default Repository

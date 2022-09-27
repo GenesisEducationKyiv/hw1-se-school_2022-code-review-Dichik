@@ -1,13 +1,9 @@
-
-
 interface ProviderChain {
+    setNext(nextChain: ProviderChain): void
 
-    setNext(nextChain: ProviderChain): void;
+    getCurrencyRate(from: string, to: string): Promise<string>
 
-    getCurrencyRate(from: string, to: string): Promise<string>;
-
-    getType(): string;
-    
+    getType(): string
 }
 
-export default ProviderChain;
+export default ProviderChain

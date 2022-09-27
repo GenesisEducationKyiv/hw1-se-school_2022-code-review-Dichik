@@ -1,4 +1,3 @@
-
 // describe('GET /rate', () => {
 
 //     const request = require('supertest')
@@ -18,7 +17,7 @@
 //         const response = await request(baseURL).get('/rate').send(data)
 //         expect(response).not.toBe(NaN || null || undefined)
 //     })
-    
+
 //     it('should be float number', async () => {
 //         const response = await request(baseURL).get('/rate')
 //         const result = parseFloat(response.body)
@@ -26,7 +25,7 @@
 //     })
 
 //     it('test caching with timeout >5000ms', async () => {
-        
+
 //         // TODO after adding caching to rate service
 //     })
 

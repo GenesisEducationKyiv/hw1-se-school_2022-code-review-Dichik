@@ -1,10 +1,7 @@
-
-
 interface Factory {
-    
-    init(): void;
+    init(): void
 
-    getByName(name: string): any;
+    getByName(name: string): any
 }
 
-export default Factory;
+export default Factory

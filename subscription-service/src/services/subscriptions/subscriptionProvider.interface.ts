@@ -1,7 +1,10 @@
-import { EmailEntity } from "../../models/email.entity";
+import { EmailEntity } from '../../models/email.entity'
 
 interface SubscriptionProvider {
-    subscribe(request: Express.Request, response: Express.Response): Promise<EmailEntity[]>;
+    subscribe(
+        request: Express.Request,
+        response: Express.Response
+    ): Promise<EmailEntity[]>
 }
 
-export default SubscriptionProvider;
+export default SubscriptionProvider

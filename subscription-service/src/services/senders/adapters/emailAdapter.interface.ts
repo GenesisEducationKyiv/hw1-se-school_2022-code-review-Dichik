@@ -1,7 +1,7 @@
-import { EmailEntity } from "../../../models/email.entity";
+import { EmailEntity } from '../../../models/email.entity'
 
 interface EmailAdapter {
-    getMailOptions(email: EmailEntity): any;
+    getMailOptions(email: EmailEntity): any
 }
 
-export default EmailAdapter;
+export default EmailAdapter

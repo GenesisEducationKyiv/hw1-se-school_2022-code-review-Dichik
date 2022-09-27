@@ -6,7 +6,6 @@
 //     const baseURL = "http://localhost:8081"
 //     const addedEmails: Array<string> = [];
 //     let subscriptionService: SubscribtionService;
-    
 
 //     const newEmail = {
 //         email: `test.email${date}@email.com`
@@ -43,7 +42,6 @@
 //         expect(response.statusCode).toBe(201);
 //         expect(lastEmail).toBe(newEmail.email);
 
-        
 //     })
 
 //     it('shouldn\'t subcribe new invalid email', async () => {

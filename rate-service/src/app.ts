@@ -3,10 +3,9 @@ import bodyParser from 'body-parser'
 import CoinmarketRateController from './controllers/rate.controller'
 
 class App {
-
     private app: any = express()
     private port = 8081
-    private rateController: CoinmarketRateController;
+    private rateController: CoinmarketRateController
 
     constructor() {
         this.app.use(bodyParser.urlencoded({ extended: true }))
@@ -16,9 +15,12 @@ class App {
     }
 
     initRoutes() {
-        this.app.get('/rate', (request: express.Request, response: express.Response) => {
-            this.rateController.rate(request, response)
-        })
+        this.app.get(
+            '/rate',
+            (request: express.Request, response: express.Response) => {
+                this.rateController.rate(request, response)
+            }
+        )
     }
 
     listen() {
@@ -33,7 +35,6 @@ class App {
             this.app.close()
         })
     }
-
 }
 
 export default App
