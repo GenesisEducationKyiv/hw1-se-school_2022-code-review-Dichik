@@ -1,0 +1,34 @@
+services:
+  rate-service:
+    build:
+      context: ./rate-service
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    command: npm start
+    env_file:
+      - .env
+    ports:
+      - 8081:8081
+    networks:
+      - ts-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  subscription-service:
+    build:
+      context: ./subscription-service
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    command: npm start
+    env_file:
+      - .env
+    ports:
+      - 9081:9081
+    networks:
+      - ts-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+networks:
+    ts-network:

@@ -1,6 +1,6 @@
 FROM node:10
 
-WORKDIR /usr/src/app
+WORKDIR /subscription-service
 
 COPY package*.json ./
 
@@ -8,5 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 8081
-CMD [ "ts-node", "server.ts" ]
+EXPOSE 9081
+
+CMD [ "npm", "start" ]
