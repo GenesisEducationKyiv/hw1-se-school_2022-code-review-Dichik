@@ -7,12 +7,11 @@ export class NodemailerAdapter implements EmailAdapter {
 
     async getMailOptions(email: EmailEntity): Promise<any> {
         
-        const priceForBTC = await Promise.resolve(this.getRate()) // TODO fix issue with getting price
-
-		const mailSubject = 'BTC price in UAH'
+        const priceForBTC = await Promise.resolve(this.getRate()) 
+        const mailSubject = 'BTC price in UAH'
 		const mailBody = `Price for BTC ${priceForBTC} UAH`
         const recipient: string = email.address
-
+		
         const mailOptions = {
 			from: process.env.SENDER_EMAIL,
 			to: recipient,
@@ -30,7 +29,13 @@ export class NodemailerAdapter implements EmailAdapter {
                     Accept: 'application/json',
                 }
             })
-            const result = response.body 
+
+            if (!response.ok) {
+                throw new Error(`Error while getting price! status: ${response.status}`);
+            }
+
+            const result = (await response.json()) as string
+            console.log('Result is: ', result)
             return result
         } catch (error) {
             throw new Error(error as string)

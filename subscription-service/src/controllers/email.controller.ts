@@ -11,7 +11,10 @@ export class EmailController {
 
     async sendEmails(_request: express.Request, response: express.Response) {
         try {
-            response.status(200).json(await this.emailService.sendBulk())
+            await this.emailService.sendBulk()
+            response.status(200).json({
+                message: `All emails were sent successfully!`
+            })
         } catch (error) {
             this.handleSendingEmailsError(error, response)
         }
