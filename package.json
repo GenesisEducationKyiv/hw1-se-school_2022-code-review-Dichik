@@ -6,6 +6,6 @@
     },
     "scripts": {
         "prepare": "husky install",
-        "prettier-script": "npx prettier --write ."
+        "prettier-script": "prettier --write ."
     }
 }
