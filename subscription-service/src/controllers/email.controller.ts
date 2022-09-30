@@ -1,12 +1,12 @@
 import express from 'express'
 import { SendEmailError } from '../services/senders/exceptions/sendEmail.error'
-import { SendEmailsService } from '../services/senders/sendEmails.service'
+import { SendEmailService } from '../services/senders/sendEmails.service'
 
 export class EmailController {
-    private emailService: SendEmailsService
+    private emailService: SendEmailService
 
     constructor() {
-        this.emailService = new SendEmailsService()
+        this.emailService = new SendEmailService()
     }
 
     async sendEmails(_request: express.Request, response: express.Response) {

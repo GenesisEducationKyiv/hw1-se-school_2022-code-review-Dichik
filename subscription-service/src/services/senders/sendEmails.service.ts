@@ -6,7 +6,7 @@ import { NodemailerAdapter } from './adapters/nodemailerAdapter'
 import { SendEmailError } from './exceptions/sendEmail.error'
 import { EmailEntity } from '../../models/email.entity'
 
-class SendEmailService implements EmailSender {
+export class SendEmailService implements EmailSender {
     private emailsRepository: SubscriptionRepository
     private emailAdapter: NodemailerAdapter
     private mailer: Transporter
