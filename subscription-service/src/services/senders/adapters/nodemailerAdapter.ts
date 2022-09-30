@@ -1,6 +1,7 @@
-import axios from "axios";
 import { EmailEntity } from "../../../models/email.entity";
 import EmailAdapter from "./emailAdapter.interface";
+import fetch from 'node-fetch';
+
 
 class NodemailerAdapter implements EmailAdapter {
 
@@ -23,9 +24,13 @@ class NodemailerAdapter implements EmailAdapter {
 
     private async getRate(): Promise<any> {
         try {
-            const result = await Promise.resolve(axios.get(
-                'http://localhost:8081/rate'
-            ))
+            const response = await fetch('http://localhost:8081/rate', {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                }
+            })
+            const result = response.body 
             return result
         } catch (error) {
             throw new Error(error as string)

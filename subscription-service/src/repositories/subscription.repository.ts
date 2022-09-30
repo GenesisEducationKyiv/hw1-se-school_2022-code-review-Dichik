@@ -4,6 +4,7 @@ import { InvalidEmailError } from '../services/subscriptions/exceptions/invalidE
 import FileReaderService from '../input_output/fileReader.service'
 import FileWriterService from '../input_output/fileWriter.service'
 import Repository from './repository.interface'
+require('dotenv').config({ path: __dirname + '/.env' });
 
 class SubscriptionRepository implements Repository<EmailEntity> {
     private static regexEmail = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+'
