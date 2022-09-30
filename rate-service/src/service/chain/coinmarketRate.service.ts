@@ -1,7 +1,7 @@
 const Coinmarketcap = require('coinmarketcap-api')
-import ProviderChain from './providerChain.interface'
+import { ProviderChain } from './providerChain.interface'
 
-class CoinmarketRateChain implements ProviderChain {
+export class CoinmarketRateChain implements ProviderChain {
     private key: string
     private client: any
     private nextChain: ProviderChain
@@ -36,5 +36,3 @@ class CoinmarketRateChain implements ProviderChain {
         return 'COINMARKET'
     }
 }
-
-export default CoinmarketRateChain

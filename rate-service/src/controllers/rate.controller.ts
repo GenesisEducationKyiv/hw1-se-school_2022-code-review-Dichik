@@ -1,7 +1,7 @@
 import express from 'express'
-import RateService from '../service/rate.service'
+import { RateService } from '../service/rate.service'
 
-class RateController {
+export class RateController {
     private rateService: RateService
 
     constructor() {
@@ -18,5 +18,3 @@ class RateController {
         }
     }
 }
-
-export default RateController

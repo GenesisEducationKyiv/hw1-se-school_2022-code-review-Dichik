@@ -1,7 +1,7 @@
 import axios from 'axios'
-import ProviderChain from './providerChain.interface'
+import { ProviderChain } from './providerChain.interface'
 
-class CoinbaseRateService implements ProviderChain {
+export class CoinbaseRateService implements ProviderChain {
     private nextChain: ProviderChain
 
     setNext(nextChain: ProviderChain): void {
@@ -28,5 +28,3 @@ class CoinbaseRateService implements ProviderChain {
         return 'COINBASE'
     }
 }
-
-export default CoinbaseRateService

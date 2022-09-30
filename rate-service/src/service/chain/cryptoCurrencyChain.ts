@@ -1,8 +1,8 @@
 import { InvalidCurrenctProviderError } from '../exceptions/invalidCurrencyProvider.error'
-import FactoryRate from '../factory/factoryRate'
-import ProviderChain from './providerChain.interface'
+import { FactoryRate } from '../factory/factoryRate'
+import { ProviderChain } from './providerChain.interface'
 
-class CryptoCurrencyChain {
+export class CryptoCurrencyChain {
     private cryptoCurrencyProvider: ProviderChain
     private factoryRate: FactoryRate
 
@@ -42,5 +42,3 @@ class CryptoCurrencyChain {
         return `${this.cryptoCurrencyProvider.getType()} - Response: ${result}`
     }
 }
-
-export default CryptoCurrencyChain

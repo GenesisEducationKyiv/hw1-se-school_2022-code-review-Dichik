@@ -1,26 +1,23 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import CoinmarketRateController from './controllers/rate.controller'
+import express from 'express';
+import bodyParser from 'body-parser';
+import { RateController } from './controllers/rate.controller';
 
-class App {
-    private app: any = express()
-    private port = 8081
-    private rateController: CoinmarketRateController
+export class App {
+    private app: any = express();
+    private port = 8081;
+    private rateController: RateController;
 
     constructor() {
-        this.app.use(bodyParser.urlencoded({ extended: true }))
-        this.app.use(bodyParser.json())
-        this.app.use(bodyParser.raw())
-        this.rateController = new CoinmarketRateController()
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.raw());
+        this.rateController = new RateController();
     }
 
     initRoutes() {
-        this.app.get(
-            '/rate',
-            (request: express.Request, response: express.Response) => {
-                this.rateController.rate(request, response)
-            }
-        )
+        this.app.get('/rate', (request: express.Request, response: express.Response) => {
+            this.rateController.rate(request, response)
+        })
     }
 
     listen() {
@@ -36,5 +33,3 @@ class App {
         })
     }
 }
-
-export default App

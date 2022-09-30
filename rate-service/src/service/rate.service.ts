@@ -1,6 +1,6 @@
-import CryptoCurrencyChain from './chain/cryptoCurrencyChain'
+import { CryptoCurrencyChain } from './chain/cryptoCurrencyChain'
 
-class RateService {
+export class RateService {
     private providerChain: CryptoCurrencyChain
     private lastFetchingResult: string
     private lastFetchingTime: number = Date.now()
@@ -24,5 +24,3 @@ class RateService {
         return this.lastFetchingResult
     }
 }
-
-export default RateService

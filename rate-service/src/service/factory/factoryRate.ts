@@ -1,8 +1,8 @@
-import CoinbaseRateService from '../chain/coinbaseRate.service'
-import Factory from './factory.interface'
-import ProviderChain from '../chain/providerChain.interface'
+import { CoinbaseRateService } from '../chain/coinbaseRate.service'
+import { Factory } from './factory.interface'
+import { ProviderChain } from '../chain/providerChain.interface'
 
-class FactoryRate implements Factory {
+export class FactoryRate implements Factory {
     private factoryRate: Map<string, ProviderChain>
 
     init(): void {
@@ -20,5 +20,3 @@ class FactoryRate implements Factory {
         return this.factoryRate.get(name)
     }
 }
-
-export default FactoryRate
