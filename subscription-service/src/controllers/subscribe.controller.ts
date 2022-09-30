@@ -1,9 +1,9 @@
 import express from 'express'
 import { ExistedEmailError } from '../services/subscriptions/exceptions/existedEmail.error'
 import { InvalidEmailError } from '../services/subscriptions/exceptions/invalidEmail.error'
-import SubscribtionService from '../services/subscriptions/subscription.service'
+import { SubscribtionService } from '../services/subscriptions/subscription.service'
 
-class SubscriptionController {
+export class SubscriptionController {
     private subscriptionService: SubscribtionService
 
     constructor() {
@@ -38,5 +38,3 @@ class SubscriptionController {
         }
     }
 }
-
-export default SubscriptionController

@@ -1,7 +1,7 @@
-import Transporter from './transporter.interface'
+import { Transporter } from './transporter.interface'
 import nodemailer from 'nodemailer'
 
-class NodeMailer implements Transporter {
+export class NodeMailer implements Transporter {
     private mailer: any
 
     constructor() {
@@ -27,5 +27,3 @@ class NodeMailer implements Transporter {
         )
     }
 }
-
-export default NodeMailer

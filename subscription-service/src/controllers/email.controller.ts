@@ -1,8 +1,8 @@
 import express from 'express'
 import { SendEmailError } from '../services/senders/exceptions/sendEmail.error'
-import SendEmailsService from '../services/senders/sendEmails.service'
+import { SendEmailsService } from '../services/senders/sendEmails.service'
 
-class EmailController {
+export class EmailController {
     private emailService: SendEmailsService
 
     constructor() {
@@ -29,5 +29,3 @@ class EmailController {
         }
     }
 }
-
-export default EmailController

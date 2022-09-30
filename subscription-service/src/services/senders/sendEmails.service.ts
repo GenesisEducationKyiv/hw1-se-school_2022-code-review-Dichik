@@ -1,8 +1,8 @@
-import EmailSender from './sender.interface'
-import SubscriptionRepository from '../../repositories/subscription.repository'
-import Transporter from '../transporters/transporter.interface'
-import NodeMailer from '../transporters/emailTransporter'
-import NodemailerAdapter from './adapters/nodemailerAdapter'
+import { EmailSender } from './sender.interface'
+import { SubscriptionRepository } from '../../repositories/subscription.repository'
+import { Transporter } from '../transporters/transporter.interface'
+import { NodeMailer } from '../transporters/emailTransporter'
+import { NodemailerAdapter } from './adapters/nodemailerAdapter'
 import { SendEmailError } from './exceptions/sendEmail.error'
 import { EmailEntity } from '../../models/email.entity'
 
@@ -46,5 +46,3 @@ class SendEmailService implements EmailSender {
         console.log(message)
     }
 }
-
-export default SendEmailService

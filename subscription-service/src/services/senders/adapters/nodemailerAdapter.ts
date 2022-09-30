@@ -1,9 +1,9 @@
 import { EmailEntity } from "../../../models/email.entity";
-import EmailAdapter from "./emailAdapter.interface";
+import { EmailAdapter } from "./emailAdapter.interface";
 import fetch from 'node-fetch';
 
 
-class NodemailerAdapter implements EmailAdapter {
+export class NodemailerAdapter implements EmailAdapter {
 
     async getMailOptions(email: EmailEntity): Promise<any> {
         

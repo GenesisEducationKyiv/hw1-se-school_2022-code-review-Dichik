@@ -1,4 +1,4 @@
-interface Repository<T> {
+export interface Repository<T> {
     isExist(object: T): Promise<boolean>
 
     getAll(): Promise<Array<T>>
@@ -11,5 +11,3 @@ interface Repository<T> {
 
     save(object: T): Promise<void>
 }
-
-export default Repository

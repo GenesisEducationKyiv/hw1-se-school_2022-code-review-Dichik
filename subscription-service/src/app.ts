@@ -1,9 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import EmailController from './controllers/email.controller'
-import SubscriptionController from './controllers/subscribe.controller'
+import { EmailController } from './controllers/email.controller'
+import { SubscriptionController } from './controllers/subscribe.controller'
 
-class App {
+export class App {
     private app: any = express()
     private port = 9081
     private emailController: EmailController
@@ -46,5 +46,3 @@ class App {
         })
     }
 }
-
-export default App

@@ -1,9 +1,9 @@
 import express from 'express'
-import SubscriptionRepository from '../../repositories/subscription.repository'
+import { SubscriptionRepository } from '../../repositories/subscription.repository'
 import { EmailEntity } from '../../models/email.entity'
-import SubscriptionProvider from './subscriptionProvider.interface'
+import { SubscriptionProvider } from './subscriptionProvider.interface'
 
-class SubscribtionService implements SubscriptionProvider {
+export class SubscribtionService implements SubscriptionProvider {
     private subscriptionRepository: SubscriptionRepository
 
     constructor() {
@@ -23,5 +23,3 @@ class SubscribtionService implements SubscriptionProvider {
         return this.subscriptionRepository.getAll()
     }
 }
-
-export default SubscribtionService

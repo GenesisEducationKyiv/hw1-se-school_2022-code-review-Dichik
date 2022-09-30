@@ -1,6 +1,6 @@
 import { EmailEntity } from '../../models/email.entity'
 
-interface EmailSender {
+export interface EmailSender {
     send(
         email: EmailEntity,
         mailSubject: string,
@@ -9,5 +9,3 @@ interface EmailSender {
 
     sendBulk(): Promise<void>
 }
-
-export default EmailSender
