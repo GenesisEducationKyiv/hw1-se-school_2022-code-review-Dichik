@@ -1,26 +1,18 @@
+import { CustomCaching } from './caching/customCaching'
 import { CryptoCurrencyChain } from './chain/cryptoCurrencyChain'
 
 export class RateService {
-    private providerChain: CryptoCurrencyChain
-    private lastFetchingResult: string
-    private lastFetchingTime: number = Date.now()
-    private CACHING_TIME: number = process.env
-        .DEFAULT_CACHING_TIME as unknown as number
+    private providerChain: CryptoCurrencyChain;
+    private cachingProvider: CustomCaching;
 
     constructor() {
-        this.providerChain = new CryptoCurrencyChain()
-        this.lastFetchingResult = ''
+        this.providerChain = new CryptoCurrencyChain();
+        this.cachingProvider = new CustomCaching();
     }
 
     async rate(): Promise<string> {
-        if (
-            Date.now() - this.lastFetchingTime < this.CACHING_TIME &&
-            this.lastFetchingResult !== ''
-        ) {
-            return this.lastFetchingResult
-        }
-        this.lastFetchingResult = await this.providerChain.getCurrencyRate()
-        this.lastFetchingTime = Date.now()
-        return this.lastFetchingResult
+        return await Promise.resolve(
+            this.cachingProvider.getCachedValue(this.providerChain)
+        );
     }
 }
