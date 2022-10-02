@@ -4,7 +4,7 @@ import { RateController } from './controllers/rate.controller';
 
 export class App {
     private app: any = express();
-    private port = 8081;
+    private port = process.env.DEFAULT_RATE_SERVICE_PORT as unknown as number;
     private rateController: RateController;
 
     constructor() {

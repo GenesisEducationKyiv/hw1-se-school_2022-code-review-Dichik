@@ -5,7 +5,7 @@ import { SubscriptionController } from './controllers/subscribe.controller'
 
 export class App {
     private app: any = express()
-    private port = 9081
+    private port = process.env.DEFAULT_SUBSCRIPTION_SERVICE_PORT as unknown as number;
     private emailController: EmailController
     private subscriptionController: SubscriptionController
 
