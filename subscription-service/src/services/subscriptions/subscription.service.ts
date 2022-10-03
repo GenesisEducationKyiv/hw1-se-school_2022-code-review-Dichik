@@ -2,14 +2,12 @@ import express from 'express';
 import { SubscriptionRepository } from '../../repositories/subscription.repository';
 import { EmailEntity } from '../../models/email.entity';
 import { SubscriptionProvider } from './subscriptionProvider.interface';
-import { autoInjectable } from 'tsyringe';
+import { injectable, inject } from 'tsyringe';
 
-@autoInjectable()
+@injectable()
 export class SubscribtionService implements SubscriptionProvider {
-    private subscriptionRepository: SubscriptionRepository;
 
-    constructor(subscriptionRepository: SubscriptionRepository) {
-        this.subscriptionRepository = subscriptionRepository;
+    constructor(@inject(SubscriptionRepository) private subscriptionRepository: SubscriptionRepository) {
     }
 
     public async subscribe(

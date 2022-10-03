@@ -1,22 +1,21 @@
 import express from 'express'
-import 'reflect-metadata'
-import { container } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 import bodyParser from 'body-parser'
 import { EmailController } from './controllers/email.controller'
 import { SubscriptionController } from './controllers/subscribe.controller'
 
+@injectable()
 export class App {
     private app: any = express();
     private port = process.env.DEFAULT_SUBSCRIPTION_SERVICE_PORT as unknown as number;
-    private emailController: EmailController;
-    private subscriptionController: SubscriptionController;
 
-    constructor() {
+    constructor(
+        @inject(EmailController) private emailController: EmailController,
+        @inject(SubscriptionController) private subscriptionController: SubscriptionController
+    ) {
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.raw());
-        this.emailController = container.resolve(EmailController);
-        this.subscriptionController = container.resolve(SubscriptionController);
     }
 
     initRoutes() {

@@ -4,20 +4,19 @@ import { InvalidEmailError } from '../services/subscriptions/exceptions/invalidE
 import { FileReaderService } from '../input_output/fileReader.service'
 import { FileWriterService } from '../input_output/fileWriter.service'
 import { Repository } from './repository.interface'
-import { autoInjectable } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 
-@autoInjectable()
+@injectable()
 export class SubscriptionRepository implements Repository<EmailEntity> {
     private static regexEmail = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+'
 
-    private storage: string
-    private fileReaderService: FileReaderService
-    private fileWriterService: FileWriterService
+    private storage: string;
 
-    constructor(fileReaderService: FileReaderService, fileWriterService: FileWriterService) {
+    constructor(
+        @inject(FileReaderService) private fileReaderService: FileReaderService, 
+        @inject(FileWriterService) private fileWriterService: FileWriterService
+    ) {
         this.storage = process.env.DEFAULT_STORAGE as string;
-        this.fileReaderService = fileReaderService;
-        this.fileWriterService = fileWriterService;
     }
 
     async isExist(email: EmailEntity): Promise<boolean> {

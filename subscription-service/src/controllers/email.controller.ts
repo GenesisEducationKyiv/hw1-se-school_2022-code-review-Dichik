@@ -1,14 +1,12 @@
 import express from 'express'
-import { autoInjectable } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 import { SendEmailError } from '../services/senders/exceptions/sendEmail.error'
 import { SendEmailService } from '../services/senders/sendEmails.service'
 
-@autoInjectable()
+@injectable()
 export class EmailController {
-    private emailService: SendEmailService;
 
-    constructor(emailService: SendEmailService) {
-        this.emailService = emailService;
+    constructor(@inject(SendEmailService) private emailService: SendEmailService) {
     }
 
     async sendEmails(_request: express.Request, response: express.Response) {

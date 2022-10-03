@@ -5,17 +5,16 @@ import { NodeMailer } from '../transporters/emailTransporter'
 import { NodemailerAdapter } from './adapters/nodemailerAdapter'
 import { SendEmailError } from './exceptions/sendEmail.error'
 import { EmailEntity } from '../../models/email.entity'
+import { inject, injectable } from 'tsyringe'
 
+@injectable()
 export class SendEmailService implements EmailSender {
-    private emailsRepository: SubscriptionRepository
-    private emailAdapter: NodemailerAdapter
-    private mailer: Transporter
 
-    constructor() {
-        this.emailsRepository = new SubscriptionRepository()
-        this.emailAdapter = new NodemailerAdapter()
-        this.mailer = new NodeMailer()
-    }
+    constructor(
+        @inject(SubscriptionRepository) private emailsRepository: SubscriptionRepository,
+        @inject(NodemailerAdapter) private emailAdapter: NodemailerAdapter,
+        @inject(NodeMailer) private mailer: Transporter
+    ) {}
 
     public async send(email: EmailEntity): Promise<void> {
         try {

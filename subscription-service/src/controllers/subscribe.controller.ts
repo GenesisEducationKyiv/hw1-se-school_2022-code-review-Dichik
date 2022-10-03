@@ -1,15 +1,13 @@
 import express from 'express'
-import { autoInjectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { ExistedEmailError } from '../services/subscriptions/exceptions/existedEmail.error'
 import { InvalidEmailError } from '../services/subscriptions/exceptions/invalidEmail.error'
 import { SubscribtionService } from '../services/subscriptions/subscription.service'
 
-@autoInjectable()
+@injectable()
 export class SubscriptionController {
-    private subscriptionService: SubscribtionService;
 
-    constructor(subscriptionService: SubscribtionService) {
-        this.subscriptionService = subscriptionService;
+    constructor(@inject(SubscribtionService) private subscriptionService: SubscribtionService) {
     }
 
     async subscribe(request: express.Request, response: express.Response) {
