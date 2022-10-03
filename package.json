@@ -8,5 +8,9 @@
         "prepare": "husky install",
         "prettier-script": "prettier --write .",
         "start": "ts-node rate-service/server.ts & ts-node subscription-service/server.ts"
+    },
+    "dependencies": {
+        "reflect-metadata": "^0.1.13",
+        "tsyringe": "^4.7.0"
     }
 }

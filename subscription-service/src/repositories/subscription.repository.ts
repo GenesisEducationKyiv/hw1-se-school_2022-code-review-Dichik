@@ -4,7 +4,9 @@ import { InvalidEmailError } from '../services/subscriptions/exceptions/invalidE
 import { FileReaderService } from '../input_output/fileReader.service'
 import { FileWriterService } from '../input_output/fileWriter.service'
 import { Repository } from './repository.interface'
+import { autoInjectable } from 'tsyringe'
 
+@autoInjectable()
 export class SubscriptionRepository implements Repository<EmailEntity> {
     private static regexEmail = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+'
 
@@ -12,30 +14,26 @@ export class SubscriptionRepository implements Repository<EmailEntity> {
     private fileReaderService: FileReaderService
     private fileWriterService: FileWriterService
 
-    constructor() {
-        this.storage = process.env.DEFAULT_STORAGE as string
-        this.fileReaderService = new FileReaderService()
-        this.fileWriterService = new FileWriterService()
+    constructor(fileReaderService: FileReaderService, fileWriterService: FileWriterService) {
+        this.storage = process.env.DEFAULT_STORAGE as string;
+        this.fileReaderService = fileReaderService;
+        this.fileWriterService = fileWriterService;
     }
 
     async isExist(email: EmailEntity): Promise<boolean> {
-        const allEmails = await Promise.resolve(this.getAll())
-        return SubscriptionRepository.isEmailExist(allEmails, email)
+        const allEmails = await Promise.resolve(this.getAll());
+        return SubscriptionRepository.isEmailExist(allEmails, email);
     }
 
     async getAll(): Promise<Array<EmailEntity>> {
         const dataFromFileJson = await Promise.resolve(
             this.fileReaderService.read(this.storage)
-        )
+        );
         if (!dataFromFileJson) {
-            throw new Error("Couldn't load emails from file")
+            throw new Error("Couldn't load emails from file");
         }
-        const allEmails: Array<EmailEntity> = JSON.parse(dataFromFileJson)
-        return allEmails
-    }
-
-    getById(_id: number): EmailEntity {
-        throw new Error('Method not implemented.')
+        const allEmails: Array<EmailEntity> = JSON.parse(dataFromFileJson);
+        return allEmails;
     }
 
     async save(email: EmailEntity): Promise<void> {

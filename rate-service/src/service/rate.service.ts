@@ -1,12 +1,14 @@
+import { inject, injectable } from 'tsyringe';
 import { CustomCaching } from './caching/customCaching'
 import { CryptoCurrencyChain } from './chain/cryptoCurrencyChain'
 
+@injectable()
 export class RateService {
-    private providerChain: CryptoCurrencyChain;
     private cachingProvider: CustomCaching;
 
-    constructor() {
-        this.providerChain = new CryptoCurrencyChain();
+    constructor(
+        @inject(CryptoCurrencyChain) private providerChain: CryptoCurrencyChain
+    ) {
         this.cachingProvider = new CustomCaching();
     }
 

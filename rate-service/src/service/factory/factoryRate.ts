@@ -5,7 +5,7 @@ import { ProviderChain } from '../chain/providerChain.interface'
 export class FactoryRate implements Factory {
     private factoryRate: Map<string, ProviderChain>
 
-    init(): void {
+    constructor() {
         this.factoryRate = new Map<string, ProviderChain>()
 
         this.factoryRate.set('coinmarket', new CoinbaseRateService())

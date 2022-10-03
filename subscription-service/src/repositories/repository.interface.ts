@@ -3,7 +3,5 @@ export interface Repository<T> {
 
     getAll(): Promise<Array<T>>
 
-    getById(id: number): T
-
     save(object: T): Promise<void>
 }

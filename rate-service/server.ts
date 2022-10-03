@@ -1,8 +1,10 @@
-import { App } from './src/app'
-const dotenv = require('dotenv')
-dotenv.config()
+import "reflect-metadata";
+import { container } from 'tsyringe';
+import { App } from './src/app';
+const dotenv = require('dotenv');
+dotenv.config();
 
-const app = new App()
+const app = container.resolve(App);
 
-app.initRoutes()
-app.listen()
+app.initRoutes();
+app.listen();
