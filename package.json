@@ -10,6 +10,7 @@
         "start": "ts-node rate-service/server.ts & ts-node subscription-service/server.ts"
     },
     "dependencies": {
+        "amqplib": "^0.10.3",
         "reflect-metadata": "^0.1.13",
         "tsyringe": "^4.7.0"
     }
