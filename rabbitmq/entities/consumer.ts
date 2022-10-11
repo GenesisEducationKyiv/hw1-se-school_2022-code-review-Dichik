@@ -1,4 +1,4 @@
-import { ConsumerBroker } from "./consumerBroker";
+import { ConsumerBroker } from "./brokers/consumerBroker";
 
 export class Consumer {
 
@@ -15,7 +15,10 @@ export class Consumer {
         const channel = await this.broker.createChannel(connection);
 
         const messages: Array<string> = await this.broker.consume(channel, this.queue);
-        connection.close();
+        setTimeout(() => {
+            connection.close();
+            process.exit(0);
+        }, 500);
         return messages;
     }
 

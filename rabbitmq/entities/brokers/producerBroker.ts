@@ -1,4 +1,4 @@
-import { RabbitMQ } from "./rabbitmq";
+import { RabbitMQ } from "../rabbitmq";
 
 export class ProducerBroker extends RabbitMQ {
 

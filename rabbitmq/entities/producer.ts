@@ -1,4 +1,4 @@
-import { ProducerBroker } from "./producerBroker";
+import { ProducerBroker } from "./brokers/producerBroker";
 
 export class Producer {
 
@@ -10,12 +10,15 @@ export class Producer {
         this.queue = queue;
     }
 
-    public async produce(msg: string): Promise<void> {
+    public async publish(msg: string): Promise<void> {
         const connection = await this.broker.connect();
         const channel = await this.broker.createChannel(connection);
 
         const wasSent: any = await this.broker.send(channel, this.queue, msg);
-        connection.close();
+        setTimeout(() => {
+            connection.close();
+            process.exit(0);
+        }, 500);
         console.log(wasSent);
     }
 
