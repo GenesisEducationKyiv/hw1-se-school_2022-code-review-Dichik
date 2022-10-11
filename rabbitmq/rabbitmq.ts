@@ -20,7 +20,7 @@ export class RabbitMQ {
 
     public async createChannel(connection: Connection): Promise<Channel> {
         return new Promise((resolve, reject) => {
-            connection.createChannel((error: any, channel: unknown) => {
+            connection.createChannel((error: any, channel: Channel) => {
                 if (error) {
                     reject(error);
                 }
@@ -33,16 +33,17 @@ export class RabbitMQ {
         return new Promise((resolve) => {
             const messages: Array<object> = [];
             channel.consume(queue, (msg: any) => {
-                let message: any;
-                try {
-                  message = JSON.parse(msg.content.toString());
-                } catch (err) {
-                  message = msg.content.toString();
+                    let message: any;
+                    try {
+                    message = JSON.parse(msg.content.toString());
+                    } catch (err) {
+                    message = msg.content.toString();
+                    }
+                    messages.push(message);
+                    resolve(messages);
+                }, { 
+                    noAck: true 
                 }
-                messages.push(message);
-                resolve(messages);
-              },
-              { noAck: true }
             );
         });
     }

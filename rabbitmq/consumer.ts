@@ -9,9 +9,9 @@ export class Consumer {
         this.broker = broker;
     }
 
-    public async produce(): Promise<Array<string>> {
+    public async consumer(): Promise<Array<string>> {
         const connection = await this.broker.connect();
-        const channel = await this.broker.connectChannel();
+        const channel = await this.broker.connectChannel(connection, 'rate');
 
         const messages: Array<string> = await this.broker.consume(channel, 'rate');
         connection.close();
