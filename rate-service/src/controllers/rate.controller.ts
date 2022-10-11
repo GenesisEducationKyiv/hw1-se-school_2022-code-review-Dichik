@@ -1,6 +1,7 @@
-import express from 'express'
+import express from 'express';
 import { inject, injectable } from 'tsyringe';
-import { RateService } from '../service/rate.service'
+import { RateService } from '../service/rate.service';
+import { producer } from '../../../rabbitmq/init';
 
 @injectable()
 export default class RateController {
@@ -9,12 +10,17 @@ export default class RateController {
     }
 
     async rate(_request: express.Request, response: express.Response) {
+        var message: string;
         try {
+            message = 'Rate was successfully sent.';
             response.status(200).json(await this.rateService.rate());
         } catch (error) {
+            message = `Couldn't get rate: ${error}`;
+            producer.publish(``)
             response.status(400).json({
-                message: `Couldn't get rate: ${error}`,
+                message: message
             });
         }
+        producer.publish(message);
     }
 }

@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { InvalidCurrenctProviderError } from '../exceptions/invalidCurrencyProvider.error';
 import { FactoryRate } from '../factory/factoryRate';
 import { ProviderChain } from './providerChain.interface';
-import { rabbitProducer } from '../../../../rabbitmq/init'
+import { producer } from '../../../../rabbitmq/init'
 
 @injectable()
 export class CryptoCurrencyChain {
@@ -38,7 +38,7 @@ export class CryptoCurrencyChain {
             'UAH'
         );
         const loggedResponse: string = this.formResponse(result);
-        rabbitProducer.produce(loggedResponse);
+        producer.publish(loggedResponse);
         return loggedResponse;
     }
 

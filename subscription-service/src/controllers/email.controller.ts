@@ -24,18 +24,18 @@ export class EmailController {
     }
 
     private handleSendingEmailsError(error: any, response: express.Response) {
+        var message: string;
         if (error instanceof SendEmailError) {
-            const message: string = `Couldn't send emails: ${error}`;
-            producer.publish(message);
+            message = `Couldn't send emails: ${error}`;
             response.status(400).json({
                 message: message
             });
         } else {
-            const message: string = `Invalid error: ${error}`;
-            producer.publish(message);
+            message = `Invalid error: ${error}`;
             response.status(500).json({
                 message: `Invalid error: ${error}`
             });
         }
+        producer.publish(message);
     }
 }

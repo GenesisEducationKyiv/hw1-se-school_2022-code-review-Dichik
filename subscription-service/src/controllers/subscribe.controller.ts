@@ -25,24 +25,23 @@ export class SubscriptionController {
     }
 
     private handleSubscriptionError(error: any, response: express.Response) {
+        var message: string;
         if (error instanceof InvalidEmailError) {
-            const message: string = `Couldn't subcribe: ${error}`;
-            producer.publish(message);
+            message = `Couldn't subcribe: ${error}`;
             response.status(400).json({
                 message: message,
             });
         } else if (error instanceof ExistedEmailError) {
-            const message: string = `Couldn't subcribe: ${error}`;
-            producer.publish(message);
+            message = `Couldn't subcribe: ${error}`;
             response.status(409).json({
                 message: message,
             });
         } else {
-            const message: string = `Invalid error: ${error}`;
-            producer.publish(message);
+            message = `Invalid error: ${error}`;
             response.status(500).json({
                 message: message,
             });
         }
+        producer.publish(message);
     }
 }
