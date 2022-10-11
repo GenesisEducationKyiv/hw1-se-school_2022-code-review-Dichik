@@ -3,8 +3,8 @@ import amqp, {Channel, Connection} from 'amqplib/callback_api';
 export class RabbitMQ {
     private host: string;
     
-    constructor() {
-        this.host = 'amqp://localhost';
+    constructor(host: string) {
+        this.host = host;
     }
 
     public async connect(): Promise<Connection> {
@@ -45,6 +45,16 @@ export class RabbitMQ {
                     noAck: true 
                 }
             );
+        });
+    }
+
+    public async send(channel: any, queue: string, message: string) {
+        return new Promise(() => {
+          channel.assertQueue(queue);
+          channel.sendToQueue(queue,
+            Buffer.from(JSON.stringify({ type: "message", message }))
+          );
+          console.log(`Sent message is: ${message}`);
         });
     }
 

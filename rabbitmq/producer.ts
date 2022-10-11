@@ -8,8 +8,13 @@ export class Producer {
         this.broker = broker;
     }
 
-    public async produce(): Promise<void> {
+    public async produce(msg: string): Promise<void> {
+        const connection = await this.broker.connect();
+        const channel = await this.broker.createChannel(connection);
 
+        const wasSent: any = await this.broker.send(channel, 'rate', msg);
+        connection.close();
+        console.log(wasSent);
     }
 
 }
