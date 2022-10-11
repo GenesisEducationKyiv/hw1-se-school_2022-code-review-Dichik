@@ -29,33 +29,4 @@ export class RabbitMQ {
         });
     }
 
-    public async consume(channel: any, queue: string): Promise<any> {
-        return new Promise((resolve) => {
-            const messages: Array<object> = [];
-            channel.consume(queue, (msg: any) => {
-                    let message: any;
-                    try {
-                    message = JSON.parse(msg.content.toString());
-                    } catch (err) {
-                    message = msg.content.toString();
-                    }
-                    messages.push(message);
-                    resolve(messages);
-                }, { 
-                    noAck: true 
-                }
-            );
-        });
-    }
-
-    public async send(channel: any, queue: string, message: string) {
-        return new Promise(() => {
-          channel.assertQueue(queue);
-          channel.sendToQueue(queue,
-            Buffer.from(JSON.stringify({ type: "message", message }))
-          );
-          console.log(`Sent message is: ${message}`);
-        });
-    }
-
 }

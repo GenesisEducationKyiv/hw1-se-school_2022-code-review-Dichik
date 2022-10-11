@@ -1,12 +1,11 @@
-import { RabbitMQ } from "./rabbitmq";
-
+import { ConsumerBroker } from "./consumerBroker";
 
 export class Consumer {
 
-    private broker: RabbitMQ;
+    private broker: ConsumerBroker;
     private queue: string;
 
-    constructor(broker: RabbitMQ, queue: string) {
+    constructor(broker: ConsumerBroker, queue: string) {
         this.broker = broker;
         this.queue = queue; 
     }

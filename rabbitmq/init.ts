@@ -1,14 +1,15 @@
 import { Consumer } from "./entities/consumer";
+import { ConsumerBroker } from "./entities/consumerBroker";
 import { Producer } from "./entities/producer";
-import { RabbitMQ } from "./entities/rabbitmq";
+import { ProducerBroker } from "./entities/producerBroker";
 
 const host: string = 'amqp://localhost';
 const queue: string = 'rate';
 
 export const rabbitConsumer = new Consumer(
-    new RabbitMQ(host), queue
+    new ConsumerBroker(host), queue
 );
 
 export const rabbitProducer = new Producer(
-    new RabbitMQ(host), queue
+    new ProducerBroker(host), queue
 );
