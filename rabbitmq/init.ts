@@ -1,6 +1,6 @@
-import { Consumer } from "./consumer";
-import { Producer } from "./producer";
-import { RabbitMQ } from "./rabbitmq";
+import { Consumer } from "./entities/consumer";
+import { Producer } from "./entities/producer";
+import { RabbitMQ } from "./entities/rabbitmq";
 
 const host: string = 'amqp://localhost';
 const queue: string = 'rate';
