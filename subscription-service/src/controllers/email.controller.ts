@@ -1,7 +1,8 @@
-import express from 'express'
-import { inject, injectable } from 'tsyringe'
-import { SendEmailError } from '../services/senders/exceptions/sendEmail.error'
-import { SendEmailService } from '../services/senders/sendEmails.service'
+import express from 'express';
+import { inject, injectable } from 'tsyringe';
+import { SendEmailError } from '../services/senders/exceptions/sendEmail.error';
+import { SendEmailService } from '../services/senders/sendEmails.service';
+import { producer } from '../../../rabbitmq/init';
 
 @injectable()
 export class EmailController {
@@ -12,8 +13,10 @@ export class EmailController {
     async sendEmails(_request: express.Request, response: express.Response) {
         try {
             await this.emailService.sendBulk();
+            const message: string = `All emails were sent successfully!`;
+            producer.publish(message);
             response.status(200).json({
-                message: `All emails were sent successfully!`
+                message: message
             });
         } catch (error) {
             this.handleSendingEmailsError(error, response);
@@ -21,14 +24,18 @@ export class EmailController {
     }
 
     private handleSendingEmailsError(error: any, response: express.Response) {
+        var message: string;
         if (error instanceof SendEmailError) {
+            message = `Couldn't send emails: ${error}`;
             response.status(400).json({
-                message: `Couldn't send emails: ${error}`,
+                message: message
             });
         } else {
+            message = `Invalid error: ${error}`;
             response.status(500).json({
-                message: `Invalid error: ${error}`,
+                message: `Invalid error: ${error}`
             });
         }
+        producer.publish(message);
     }
 }
